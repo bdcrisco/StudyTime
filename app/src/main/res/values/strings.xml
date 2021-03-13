@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">StudyTime</string>
+    <string name="move_to_calendar">Calendar</string>
+    <string name="move_to_timer">Timer</string>
+    <string name="move_to_list">List View</string>
+    <string name="move_to_addsession">Add Session</string>
+    <string name="return_to_previous">Return</string>
+</resources>

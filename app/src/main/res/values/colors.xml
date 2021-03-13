@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#054A91</color>
+<!--This is your button color, change name plz-->
+    <color name="purple_500">#054A91</color>
+    <color name="purple_700">#054A91</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#DBE4EE</color>
+</resources>
