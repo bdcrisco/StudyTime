@@ -5,4 +5,8 @@
     <string name="move_to_list">List View</string>
     <string name="move_to_addsession">Add Session</string>
     <string name="return_to_previous">Return</string>
+    <string name="string_course">string_course_name</string>
+    <string name="string_date">string_date</string>
+    <string name="string_time">string_time</string>
+    <string name="test">test_string</string>
 </resources>
