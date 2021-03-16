@@ -12,7 +12,7 @@ public class FileHelper {
 
     // Part 3
     public static void createFile(String filename) {
-        getFilesDir();
+//        getFilesDir();
 //        try {
 //            File myObj = new File(mcoContext.getFilesDir(), filename + ".txt");
 //            if (myObj.createNewFile()) {
