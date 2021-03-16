@@ -8,4 +8,5 @@
     <string name="string_course">string_course_name</string>
     <string name="string_date">string_date</string>
     <string name="string_time">string_time</string>
+    <string name="test">test_string</string>
 </resources>
