@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.StudyTime.CalendarActivity">
 
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:background="@drawable/bg_calendar"
+        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_listview">
+
+    </CalendarView>
+
     <Button
         android:id="@+id/switch_listview"
         android:layout_width="wrap_content"
@@ -22,9 +35,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="@string/move_to_timer"
         android:onClick="moveToTimer"
+        android:text="@string/move_to_timer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/myDate"
+        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
