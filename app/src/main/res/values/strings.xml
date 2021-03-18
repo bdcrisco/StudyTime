@@ -13,6 +13,7 @@
     <string name="pauseButton">Pause</string>
     <string name="saveSessionButton">Save Session</string>
     <string name="myDate">Date</string>
+    <string name="getTime">Time</string>
     <string name="addSessionDate">Date</string>
 
 </resources>

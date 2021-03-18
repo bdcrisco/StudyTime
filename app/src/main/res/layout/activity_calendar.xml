@@ -6,53 +6,32 @@
     android:layout_height="match_parent"
     tools:context="com.example.StudyTime.CalendarActivity">
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/Calendar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/themeBlueGrey"
-        app:abbreviationsBarColor="@color/themeBlueGrey"
-        app:abbreviationsLabelsColor="@color/themeDarkBlue"
-        app:anotherMonthsDaysLabelsColor="@color/themeBlueGrey"
-        app:daysLabelsColor="@color/themeDarkBlue"
-        app:headerColor="@color/themeDarkBlue"
-        app:headerLabelColor="@color/themeBlueGrey"
-        app:highlightedDaysLabelsColor="@color/themeBlueGrey"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="300dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/bg_calendar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:pagesColor="@color/themeWhite"
-        app:selectionColor="@color/themeOrange"
-        app:selectionLabelColor="@color/themeWhite"
-        app:todayLabelColor="@color/themeOrange"
-        app:type="one_day_picker">
-    </com.applandeo.materialcalendarview.CalendarView>
+        app:layout_constraintTop_toTopOf="parent">
 
-<!--    <CalendarView-->
-<!--        android:id="@+id/addSessionCalendar"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="350dp"-->
-<!--        android:background="@drawable/bg_calendar"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/switch_listview"-->
-<!--        app:layout_constraintVertical_bias="0.717">-->
-
-<!--    </CalendarView>-->
+    </CalendarView>
 
     <Button
         android:id="@+id/switch_listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="652dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="24dp"
         android:onClick="moveToRecycler"
         android:text="@string/move_to_list"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,23 +39,54 @@
         android:id="@+id/to_timer_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="24dp"
         android:onClick="moveToTimer"
         android:text="@string/move_to_timer"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/switch_listview"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/myDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="11dp"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:layout_width="239dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:text="@string/myDate"
-        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"
+        app:layout_constraintBottom_toTopOf="@+id/calendarView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.926" />
+
+    <TimePicker
+        android:id="@+id/spinner"
+        android:layout_width="251dp"
+        android:layout_height="133dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_calendar"
+        android:timePickerMode="spinner"
+        android:onClick="submitTime"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Calendar" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintVertical_bias="0.836" />
+
+
+    <Button
+        android:id="@+id/timeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/getTime"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
