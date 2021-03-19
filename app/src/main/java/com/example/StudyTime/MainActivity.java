@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+     
+        HamburgerFragment hamburgerfragment = new HamburgerFragment("param1", "param2");
     }
 
     public void moveToCalendar(View view) {
