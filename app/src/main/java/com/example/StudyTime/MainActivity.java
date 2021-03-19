@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+     
+        HamburgerFragment hamburgerfragment = new HamburgerFragment("param1", "param2");
+  
+
         // initiate views
         simpleTimer = (Chronometer) findViewById(R.id.simpleTimer);
         simpleTimer.setFormat("Time: %s");
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
     public void moveToCalendar(View view) {
