@@ -13,5 +13,6 @@
     <string name="stopButton">Pause</string>
     <string name="restartButton">Restart</string>
     <string name="myDate">Date</string>
+    <string name="addSessionDate">Date</string>
 
 </resources>

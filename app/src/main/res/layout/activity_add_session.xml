@@ -10,10 +10,52 @@
         android:id="@+id/return_to_previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:text="@string/return_to_previous"
+        android:layout_marginBottom="52dp"
         android:onClick="moveToTimer"
+        android:text="@string/return_to_previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/currentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:layout_weight="1"
+        android:text="@string/addSessionDate"
+        android:textColor="@color/themeDarkBlue"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addSessionCalendar" />
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/addSessionCalendar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/themeBlueGrey"
+        app:abbreviationsBarColor="@color/themeBlueGrey"
+        app:abbreviationsLabelsColor="@color/themeDarkBlue"
+        app:anotherMonthsDaysLabelsColor="@color/themeBlueGrey"
+        app:daysLabelsColor="@color/themeDarkBlue"
+        app:headerColor="@color/themeDarkBlue"
+        app:headerLabelColor="@color/themeBlueGrey"
+        app:highlightedDaysLabelsColor="@color/themeBlueGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:pagesColor="@color/themeWhite"
+        app:selectionColor="@color/themeOrange"
+        app:selectionLabelColor="@color/themeWhite"
+        app:todayLabelColor="@color/themeOrange"
+        app:type="one_day_picker">
+
+    </com.applandeo.materialcalendarview.CalendarView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

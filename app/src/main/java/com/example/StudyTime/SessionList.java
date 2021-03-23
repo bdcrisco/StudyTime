@@ -2,12 +2,9 @@ package com.example.StudyTime;
 
 import com.google.gson.Gson;
 
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
-
-//import static com.example.team11.FileHelper.createFile;
-//import static com.example.team11.FileHelper.writeToFile;
-
 // An eagerly created singleton for the users session list
 // This means that it is created at application start up
 public class SessionList {
@@ -16,7 +13,9 @@ public class SessionList {
     // other instance variables can be here
     List<Session> sessionList = new LinkedList<>();
 
-    private SessionList() {};
+    private SessionList(){
+        addSession(new Session(new Timestamp(1616461188499L), new Timestamp(1616461188499L), new Course ("BIO101")));
+    }
 
     public static SessionList getInstance() {
         return(INSTANCE);
@@ -34,8 +33,8 @@ public class SessionList {
         Gson gson = new Gson();
         String sessionListJson = gson.toJson(sessionList);
 
-//        createFile("temp.txt");
-//        writeToFile("temp.txt", sessionListJson);
+//        createFile("sessions.txt");
+//        writeToFile("sessions.txt", sessionListJson);
     }
 
     public List<Session> getList() {

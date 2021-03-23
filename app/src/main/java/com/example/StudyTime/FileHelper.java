@@ -1,16 +1,23 @@
 package com.example.StudyTime;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class FileHelper {
+    private Context context;
+    File dir;
 
-    // Part 3
+    public FileHelper (Context context, String filename) {
+        this.context = context;
+        dir = new File(context.getApplicationContext().getFilesDir(), filename);
+    }
+
     public static void createFile(String filename) {
 //        getFilesDir();
 //        try {
@@ -38,7 +45,6 @@ public class FileHelper {
         }
     }
 
-    // Part 4
     public static String readFromFile(String filename) {
         String contents = new String();
         try {
@@ -53,5 +59,4 @@ public class FileHelper {
 
         return contents;
     }
-
 }
