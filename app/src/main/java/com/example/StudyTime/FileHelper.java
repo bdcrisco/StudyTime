@@ -1,6 +1,8 @@
 package com.example.StudyTime;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,15 +12,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHelper {
-    String filename;
-    ArrayList<Session> sessionList;
+    private Context context;
+    File dir;
 
-    public FileHelper(String filename) {
-        this.filename = filename;
-        sessionList = new ArrayList<>();
+    public FileHelper (Context context, String filename) {
+        this.context = context;
+        dir = new File(context.getApplicationContext().getFilesDir(), filename);
     }
 
-    // Part 3
     public static void createFile(String filename) {
 //        getFilesDir();
 //        try {
@@ -34,10 +35,10 @@ public class FileHelper {
 //        }
     }
 
-    public void writeToFile() {
+    public static void writeToFile(String filename, String contents) {
         try {
             FileWriter myWriter = new FileWriter(filename + ".txt");
-//            myWriter.write(contents);
+            myWriter.write(contents);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
@@ -46,8 +47,7 @@ public class FileHelper {
         }
     }
 
-    // Part 4
-    public void readFromFile() {
+    public static String readFromFile(String filename) {
         String contents = new String();
         try {
             File myObj = new File(filename + ".txt");
@@ -59,9 +59,6 @@ public class FileHelper {
             e.printStackTrace();
         }
 
-    }
-
-    public ArrayList<Session> getSessionList() {
-        return sessionList;
+        return contents;
     }
 }

@@ -8,4 +8,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#DBE4EE</color>
+
+<!--Swatch color 1 (darkblue)  054A91-->
+    <color name="themeDarkBlue">#054A91</color>
+<!--Swatch color 2 (midblue)   3E7CB1-->
+    <color name="themeMidBlue">#3E7CB1</color>
+<!--Swatch color 3 (lightblue) 81A4CD-->
+    <color name="themeLightBlue">#81A4CD</color>
+<!--Swatch color 4 (bluegrey)  DBE4EE-->
+    <color name="themeBlueGrey">#DBE4EE</color>
+<!--Swatch color 5 (orange) F17300-->
+    <color name="themeOrange">#F17300</color>
+
+    <color name="themeWhite">#FFFFFF</color>
 </resources>

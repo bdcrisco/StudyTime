@@ -10,16 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.recycler.ui.SessionViewHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> {
 
     private Context context;
-    private ArrayList<Sessions> sessionArrayList; // THIS SHOULD BE ARRAYLIST<SESSION> (FILEHELPER OBJECT)
     private ViewGroup parent;
+    SessionList sessionList = SessionList.getInstance();
+    private List<Session> localList = sessionList.getList();
 
-    public SessionAdapter(Context context, ArrayList<Sessions> sessionArrayList){
+    public SessionAdapter(Context context){
         this.context = context;
-        this.sessionArrayList = sessionArrayList;
     }
 
     @NonNull
@@ -31,16 +32,13 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SessionViewHolder holder, int position){
-        Sessions session = sessionArrayList.get(position);
-        holder.setDate(session.getDate());
-        holder.setCourseName(session.getName());
-        holder.setTime(session.getTime());
+        holder.setDate(localList.get(position).getDate());
+        holder.setCourseName(localList.get(position).getCourse().getCourseName());
+        holder.setTime(localList.get(position).getTime());
     }
 
     @Override
     public int getItemCount() {
-        return sessionArrayList == null ? 0 : sessionArrayList.size();
+        return localList == null ? 0 : localList.size();
     }
-
-
 }

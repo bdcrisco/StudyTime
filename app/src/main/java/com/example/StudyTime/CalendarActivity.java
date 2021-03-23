@@ -5,20 +5,27 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarActivity extends AppCompatActivity {
+    com.applandeo.materialcalendarview.CalendarView calendarView;
+    EventDay currentDay;
+    SessionList sessionList = SessionList.getInstance();
+
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-    CalendarView calendarView;
     TextView myDate;
     String date;
     Button getTime;
@@ -29,26 +36,27 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-//        initialize the spinner
-//        spinner= (Spinner) findViewById(R.id.spinner);
-        calendarView = (CalendarView) findViewById(R.id.calendarView);
+        calendarView = (com.applandeo.materialcalendarview.CalendarView) findViewById(R.id.Calendar);
         myDate = (TextView) findViewById(R.id.myDate);
-        getTime = findViewById(R.id.timeButton);
-        hour = calendar.get(Calendar.HOUR_OF_DAY);
-        min = calendar.get(Calendar.MINUTE);
 
         myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
+
         createEventOnCalendar();
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        OnDayClickListener onDayClick = new OnDayClickListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                date =  (month + 1) + "/" + dayOfMonth + "/" + year;
-                myDate.setText(date);
+            public void onDayClick(EventDay eventDay) {
 
             }
-        });
 
+//            @Override
+//            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+//                date =  (month + 1) + "/" + dayOfMonth + "/" + year;
+//                myDate.setText(date);
+//            }
+//        });
+
+        };
         getTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
