@@ -6,9 +6,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHelper {
+    String filename;
+    ArrayList<Session> sessionList;
+
+    public FileHelper(String filename) {
+        this.filename = filename;
+        sessionList = new ArrayList<>();
+    }
 
     // Part 3
     public static void createFile(String filename) {
@@ -26,10 +34,10 @@ public class FileHelper {
 //        }
     }
 
-    public static void writeToFile(String filename, String contents) {
+    public void writeToFile() {
         try {
             FileWriter myWriter = new FileWriter(filename + ".txt");
-            myWriter.write(contents);
+//            myWriter.write(contents);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
@@ -39,7 +47,7 @@ public class FileHelper {
     }
 
     // Part 4
-    public static String readFromFile(String filename) {
+    public void readFromFile() {
         String contents = new String();
         try {
             File myObj = new File(filename + ".txt");
@@ -51,7 +59,9 @@ public class FileHelper {
             e.printStackTrace();
         }
 
-        return contents;
     }
 
+    public ArrayList<Session> getSessionList() {
+        return sessionList;
+    }
 }

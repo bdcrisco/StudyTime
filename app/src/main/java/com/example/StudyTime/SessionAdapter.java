@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> {
 
     private Context context;
-    private ArrayList<Sessions> sessionArrayList;
+    private ArrayList<Sessions> sessionArrayList; // THIS SHOULD BE ARRAYLIST<SESSION> (FILEHELPER OBJECT)
     private ViewGroup parent;
 
     public SessionAdapter(Context context, ArrayList<Sessions> sessionArrayList){

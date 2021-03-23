@@ -14,4 +14,15 @@
     <string name="restartButton">Restart</string>
     <string name="myDate">Date</string>
 
+    <string name="course_prompt">Choose a course:</string>
+    <string name="choose_course">Choose Course</string>
+
+    <string-array name="course_array">
+        <item>CS 246</item>
+        <item>BIO 101</item>
+        <item>SCRIPTURES</item>
+
+    </string-array>
+
+
 </resources>

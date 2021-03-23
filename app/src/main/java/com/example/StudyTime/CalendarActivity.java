@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -20,13 +21,25 @@ public class CalendarActivity extends AppCompatActivity {
     CalendarView calendarView;
     TextView myDate;
     String date;
-
+    Button getTime;
+    int hour,  min;
+//    declare the spinner
+//    private Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+//        initialize the spinner
+//        spinner= (Spinner) findViewById(R.id.spinner);
         calendarView = (CalendarView) findViewById(R.id.calendarView);
-//        createEventOnCalendar();
+        myDate = (TextView) findViewById(R.id.myDate);
+        getTime = findViewById(R.id.timeButton);
+        hour = calendar.get(Calendar.HOUR_OF_DAY);
+        min = calendar.get(Calendar.MINUTE);
+
+        myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
+        createEventOnCalendar();
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -36,7 +49,35 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
 
+        getTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                TimePickerDialog timePickerDialog = new TimePickerDialog(CalendarActivity.this, 1, new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        Toast.makeText(CalendarActivity.this, ""+hourOfDay+":"+minute, Toast.LENGTH_SHORT).show();
+//                    }
+//                }, hour, min, false);
+//                timePickerDialog.show();
+            }
+        });
     }
+    public void submitTime(View view){
+        TimePicker timePicker = new TimePicker(CalendarActivity.this);
+        long returnTime = calendar.getTime().getTime();
+        returnTime += (timePicker.getHour() * 3600 + timePicker.getMinute() * 60);
+        java.sql.Timestamp sessionStart = new Timestamp(returnTime);
+        Session adjSession = new Session();
+        adjSession.setStartTime(sessionStart);
+        System.out.println(adjSession);
+
+        getTime.getSelectionStart();
+
+
+            }
+
+
 
     private void createEventOnCalendar() {
 
