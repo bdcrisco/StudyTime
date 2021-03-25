@@ -6,26 +6,52 @@
     android:layout_height="match_parent"
     tools:context="com.example.StudyTime.CalendarActivity">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:background="@drawable/bg_calendar"
-        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/Calendar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/themeBlueGrey"
+        app:abbreviationsBarColor="@color/themeBlueGrey"
+        app:abbreviationsLabelsColor="@color/themeDarkBlue"
+        app:anotherMonthsDaysLabelsColor="@color/themeBlueGrey"
+        app:daysLabelsColor="@color/themeDarkBlue"
+        app:headerColor="@color/themeDarkBlue"
+        app:headerLabelColor="@color/themeBlueGrey"
+        app:highlightedDaysLabelsColor="@color/themeBlueGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_listview">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:pagesColor="@color/themeWhite"
+        app:selectionColor="@color/themeOrange"
+        app:selectionLabelColor="@color/themeWhite"
+        app:todayLabelColor="@color/themeOrange"
+        app:type="one_day_picker">
+    </com.applandeo.materialcalendarview.CalendarView>
 
-    </CalendarView>
+<!--    <CalendarView-->
+<!--        android:id="@+id/addSessionCalendar"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="350dp"-->
+<!--        android:background="@drawable/bg_calendar"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.495"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/switch_listview"-->
+<!--        app:layout_constraintVertical_bias="0.717">-->
+
+<!--    </CalendarView>-->
 
     <Button
         android:id="@+id/switch_listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/move_to_list"
+        android:layout_marginTop="652dp"
         android:onClick="moveToRecycler"
+        android:text="@string/move_to_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/myDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -51,6 +77,6 @@
         app:layout_constraintBottom_toTopOf="@+id/to_timer_a"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+        app:layout_constraintTop_toBottomOf="@+id/Calendar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
