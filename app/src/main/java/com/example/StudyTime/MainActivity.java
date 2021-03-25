@@ -2,6 +2,7 @@ package com.example.StudyTime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -15,27 +16,28 @@ import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
 
-    // initiate views
-    private Chronometer simpleTimer = (Chronometer) findViewById(R.id.simpleTimer);
+    private Chronometer simpleTimer;
     private boolean running;
     private long pauseOffset; // use to calculate time paused
-    private FileHelper fileHelper;
-    private ArrayList<Sessions> sessionArrayList;
-    SessionList sessionList = SessionList.getInstance();
+    FileHelper fileHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fileHelper = new FileHelper("sessions");
 
+        fileHelper = new FileHelper(this, "session_list");
+        fileHelper.createFile();
+
+        // initiate views
+        simpleTimer = (Chronometer) findViewById(R.id.simpleTimer);
         simpleTimer.setFormat("Time: %s");
         simpleTimer.setBase(SystemClock.elapsedRealtime());
 
         simpleTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if ((SystemClock.elapsedRealtime() - chronometer.getBase()) >= 60000){
+                if ((SystemClock.elapsedRealtime() - chronometer.getBase())>= 60000){
 //                line below would stop the clock at the above set time (maybe after set amount of hours)
 //                chronometer.setBase(SystemClock.elapsedRealtime());
 //                give a message at the above time (maybe a time to take a quick break)
@@ -53,25 +55,8 @@ public class MainActivity extends AppCompatActivity {
     public void moveToAddSession(View view) {
         Intent intent = new Intent(this, AddSessionActivity.class);
         startActivity(intent);
-//      **********************************************
-        // when add session is clicked the time will be sent to addsession
-//        View.OnClickListener stopListener = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////            pauseTimer();
-//                simpleTimer.stop();
-//                long saveTime = SystemClock.elapsedRealtime() - simpleTimer.getBase();
-//                long seconds = (long) (saveTime / 1000 % 60); // if seconds needed
-////            adding the saveTime to the addsessionactivity
-////                Intent intent = new Intent(getApplicationContext(),
-////                        AddSessionActivity.class).putExtra("time",seconds);
-//                startActivity(intent);
-////            }
-//        }
-////         *******************************************
-//
-//        };
     }
+
     public void startTimer(View view) {
         // if not running this will start the timer (and subtract the time from stopped/paused)
         if (!running){
@@ -95,5 +80,4 @@ public class MainActivity extends AppCompatActivity {
         simpleTimer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
     }
-
 }

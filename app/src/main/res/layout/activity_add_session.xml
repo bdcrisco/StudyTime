@@ -80,18 +80,18 @@
         app:headerColor="@color/themeDarkBlue"
         app:headerLabelColor="@color/themeBlueGrey"
         app:highlightedDaysLabelsColor="@color/themeBlueGrey"
+        app:pagesColor="@color/themeWhite"
+        app:selectionColor="@color/themeOrange"
+        app:selectionLabelColor="@color/themeWhite"
+        app:todayLabelColor="@color/themeOrange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:pagesColor="@color/themeWhite"
-        app:selectionColor="@color/themeOrange"
-        app:selectionLabelColor="@color/themeWhite"
-        app:todayLabelColor="@color/themeOrange"
-        app:type="one_day_picker">
-
+        app:type="one_day_picker"
+        app:eventsEnabled="true">
     </com.applandeo.materialcalendarview.CalendarView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
