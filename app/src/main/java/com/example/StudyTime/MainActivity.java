@@ -2,6 +2,7 @@ package com.example.StudyTime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -14,11 +15,16 @@ public class MainActivity extends AppCompatActivity {
     private Chronometer simpleTimer;
     private boolean running;
     private long pauseOffset; // use to calculate time paused
+    FileHelper fileHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fileHelper = new FileHelper(this, "session_list");
+        fileHelper.createFile();
+
         // initiate views
         simpleTimer = (Chronometer) findViewById(R.id.simpleTimer);
         simpleTimer.setFormat("Time: %s");

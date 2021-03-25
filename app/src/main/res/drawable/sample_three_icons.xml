@@ -9,7 +9,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:tint="@android:color/holo_red_dark"
+            android:tint="@color/themeOrange"
             android:src="@drawable/ic_dot" />
     </item>
 

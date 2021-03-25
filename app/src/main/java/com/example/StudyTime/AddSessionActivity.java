@@ -18,6 +18,9 @@ import java.util.List;
 
 public class AddSessionActivity extends AppCompatActivity {
     CalendarView calendarView;
+
+    List<EventDay> events;
+
     EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
 
@@ -25,12 +28,14 @@ public class AddSessionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
-        List<EventDay> events = new ArrayList<>();
-
-        Calendar calendar = Calendar.getInstance();
-//        events.add(new EventDay(calendar, R.drawable.sample_three_icons));
+        events = new ArrayList<>();
 
         calendarView = (CalendarView) findViewById(R.id.addSessionCalendar);
+
+        Calendar calendar = Calendar.getInstance();
+
+        events.add(new EventDay(calendar, R.drawable.event_exists));
+
         calendarView.setEvents(events);
 
         OnDayClickListener onDayClick = new OnDayClickListener() {
@@ -41,7 +46,7 @@ public class AddSessionActivity extends AppCompatActivity {
         };
 
         TextView currentDate = (TextView) findViewById(R.id.currentDate);
-        currentDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
+        currentDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
     }
 
     public void SaveSession() {
