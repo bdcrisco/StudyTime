@@ -10,8 +10,8 @@
     <string name="string_time">string_time</string>
     <string name="test">test_string</string>
     <string name="startButton">Start</string>
-    <string name="stopButton">Pause</string>
-    <string name="restartButton">Restart</string>
+    <string name="pauseButton">Pause</string>
+    <string name="saveSessionButton">Save Session</string>
     <string name="myDate">Date</string>
     <string name="addSessionDate">Date</string>
 

@@ -42,7 +42,7 @@ public class CalendarActivity extends AppCompatActivity {
         OnDayClickListener onDayClick = new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
-
+                myDate.setText(eventDay.toString());
             }
 
 //            @Override
