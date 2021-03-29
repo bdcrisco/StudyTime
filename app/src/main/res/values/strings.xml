@@ -3,20 +3,21 @@
     <string name="move_to_calendar">Calendar</string>
     <string name="move_to_timer">Timer</string>
     <string name="move_to_list">List View</string>
-    <string name="move_to_addsession">Add Session</string>
+    <string name="move_to_addSession">Add Session</string>
     <string name="return_to_previous">Return</string>
     <string name="string_course">string_course_name</string>
     <string name="string_date">string_date</string>
     <string name="string_time">string_time</string>
     <string name="test">test_string</string>
     <string name="startButton">Start</string>
-    <string name="stopButton">Pause</string>
-    <string name="restartButton">Restart</string>
+    <string name="pauseButton">Pause</string>
+    <string name="stopButton">Stop</string>
     <string name="myDate">Date</string>
     <string name="addSessionDate">Date</string>
 
     <string name="course_prompt">Choose a course:</string>
     <string name="choose_course">Choose Course</string>
+    <string name="saveStoppedTime">saveStoppedTime</string>
 
     <string-array name="course_array">
         <item>CS 246</item>

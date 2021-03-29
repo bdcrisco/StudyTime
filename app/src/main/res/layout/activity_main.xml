@@ -11,19 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="@string/move_to_calendar"
         android:onClick="moveToCalendar"
+        android:text="@string/move_to_calendar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/to_addsession"
+        android:id="@+id/to_addSession"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
-        android:text="@string/move_to_addsession"
         android:onClick="moveToAddSession"
+        android:text="@string/move_to_addSession"
         app:layout_constraintBottom_toTopOf="@+id/calendarMove"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -43,7 +43,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restartButton" />
+        app:layout_constraintTop_toBottomOf="@+id/stopButton" />
+
+    <!--    <Button-->
+    <!--        android:id="@+id/stopButton"-->
+    <!--        android:layout_width="200sp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@+id/startButton"-->
+    <!--        android:layout_centerHorizontal="true"-->
+    <!--        android:layout_marginTop="32dp"-->
+    <!--        android:onClick="pauseTimer"-->
+    <!--        android:text="@string/pauseButton"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/startButton" />-->
 
     <Button
         android:id="@+id/startButton"
@@ -51,10 +64,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:onClick="startTimer"
+        android:layout_marginTop="64dp"
+        android:onClick="startPauseTimer"
         android:text="@string/startButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/simpleTimer" />
 
@@ -62,34 +76,21 @@
         android:id="@+id/stopButton"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/startButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:onClick="pauseTimer"
+        android:layout_marginTop="85dp"
+        android:onClick="stopTimer"
         android:text="@string/stopButton"
+        app:layout_constraintBottom_toTopOf="@+id/to_addSession"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startButton" />
-
-    <Button
-        android:id="@+id/restartButton"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/stopButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        android:onClick="resetTimer"
-        android:text="@string/restartButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stopButton" />
 
     <Chronometer
         android:id="@+id/simpleTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginBottom="64dp"
         android:background="@drawable/bg_button"
         android:gravity="center"
@@ -99,6 +100,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/startButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

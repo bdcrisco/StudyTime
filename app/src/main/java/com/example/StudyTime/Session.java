@@ -1,13 +1,9 @@
 package com.example.StudyTime;
 
-import android.os.Build;
 import android.os.SystemClock;
-
-import androidx.annotation.RequiresApi;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,8 +63,9 @@ public class Session {
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
-    public void setEndTime(Timestamp endTime) {
+    public Timestamp setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+        return endTime;
     }
     public void setCourse(Course course) {
         this.course = course;
@@ -80,4 +77,7 @@ public class Session {
             pauseTime.add(new Timestamp(SystemClock.elapsedRealtime()));
             isPaused = !isPaused;
     }
+//created when trying to use setEndTime in MainActivity
+//    public Timestamp setEndTime(long elapsedRealtime, Session newSession) {
+//    }
 }

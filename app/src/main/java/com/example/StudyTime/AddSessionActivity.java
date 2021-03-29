@@ -26,9 +26,7 @@ import java.util.List;
 
 public class AddSessionActivity extends AppCompatActivity {
     CalendarView calendarView;
-
     List<EventDay> events;
-
     EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
 
@@ -38,15 +36,23 @@ public class AddSessionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
+
         events = new ArrayList<>();
-
         calendarView = (CalendarView) findViewById(R.id.addSessionCalendar);
-
         Calendar calendar = Calendar.getInstance();
 
         events.add(new EventDay(calendar, R.drawable.event_exists));
-
         calendarView.setEvents(events);
+//          click handling
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+//                get first day selected
+                Calendar selectedDate = calendarView.getFirstSelectedDate();
+
+            }
+        });
 
         OnDayClickListener onDayClick = new OnDayClickListener() {
             @Override
@@ -54,23 +60,22 @@ public class AddSessionActivity extends AppCompatActivity {
                 currentDay = eventDay;
             }
         };
-
         TextView currentDate = (TextView) findViewById(R.id.currentDate);
         currentDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
     }
-        currentDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
-
-    addItemsOnSpinner2();
-    addListenerOnButton();
-    addListenerOnSpinnerItemSelection();
-}
+//        currentDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
+//
+//    addItemsOnSpinner2();
+//    addListenerOnButton();
+//    addListenerOnSpinnerItemSelection();
+//}
     public void addItemsOnSpinner2() {
 
         spinnerTopic = (Spinner) findViewById(R.id.spinner2);
         List<String> courses = new ArrayList<String>();
-        courses.add("General");
-        courses.add("Quiz");
-        courses.add("Team Project");
+        courses.add("CS246");
+        courses.add("BIO101");
+        courses.add("REL275");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, courses);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -102,8 +107,6 @@ public class AddSessionActivity extends AppCompatActivity {
 
         });
     }
-
-
 
     public void moveToTimer(View view) {
         Intent intent = new Intent(this, MainActivity.class);

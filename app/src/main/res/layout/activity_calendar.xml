@@ -31,20 +31,6 @@
         app:type="one_day_picker">
     </com.applandeo.materialcalendarview.CalendarView>
 
-<!--    <CalendarView-->
-<!--        android:id="@+id/addSessionCalendar"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="350dp"-->
-<!--        android:background="@drawable/bg_calendar"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/switch_listview"-->
-<!--        app:layout_constraintVertical_bias="0.717">-->
-
-<!--    </CalendarView>-->
-
     <Button
         android:id="@+id/switch_listview"
         android:layout_width="wrap_content"
@@ -68,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/myDate"
+        android:id="@+id/dayLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
