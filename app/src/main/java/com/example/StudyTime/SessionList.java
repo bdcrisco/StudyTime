@@ -14,7 +14,7 @@ public class SessionList {
     List<Session> sessionList = new LinkedList<>();
 
     private SessionList(){
-        addSession(new Session(new Timestamp(1616461188499L), new Timestamp(1616461188499L), new Course ("BIO101")));
+        addSession(new Session(new Timestamp(1616461188499L), new Timestamp(1616465188499L), new Course ("BIO101")));
     }
 
     public static SessionList getInstance() {

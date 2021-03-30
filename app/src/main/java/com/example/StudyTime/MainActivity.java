@@ -1,9 +1,11 @@
 package com.example.StudyTime;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -22,22 +24,29 @@ public class MainActivity extends AppCompatActivity {
 
     private Chronometer simpleTimer;
     private boolean running;
+    private boolean started = false;
     private long pauseOffset; // use to calculate time paused
     FileHelper fileHelper;
     Session newSession;
-//    Button btn = (Button)findViewById(R.id.startButton);
-    Button btn;
+    SessionList sessionList;
+    Button buttonStart;
+    Button buttonStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        buttonStop = findViewById(R.id.stopButton);
+
+        sessionList = SessionList.getInstance();
+        newSession = new Session();
+
         fileHelper = new FileHelper(this, "session_list");
         fileHelper.createFile();
 
         // initiate views
-        simpleTimer = (Chronometer) findViewById(R.id.simpleTimer);
+        simpleTimer = findViewById(R.id.simpleTimer);
         simpleTimer.setFormat("Time: %s");
         simpleTimer.setBase(elapsedRealtime());
 
@@ -64,56 +73,43 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void startTimer(View view) {
-        // if not running this will start the timer (and subtract the time from stopped/paused)
-        if (!running){
-            simpleTimer.setBase(elapsedRealtime() - pauseOffset);
-            simpleTimer.start();
-            running = true;
-        }
-    }
-
-    public void pauseTimer(View view) {
-        // no way to stop only pause, this will take the time and subtract the time stopped
-        if (running) {
-            simpleTimer.stop();
-            pauseOffset = elapsedRealtime() - simpleTimer.getBase();
-            running = false;
-        }
-    }
 
     public void startPauseTimer(View view) {
 //        figure out how to change name of button based on bool running or !running
-        btn = (Button)findViewById(R.id.startButton);
-        btn.setOnClickListener(new View.OnClickListener() {
+        buttonStart = (Button)findViewById(R.id.startButton);
+        buttonStart.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                if (!running && (btn.getText().toString().trim().equals("Start"))) {
-                    btn.setText("Pause");
+                if (!running && (buttonStart.getText().toString().trim().equals("Start"))) {
+                    buttonStart.setText("Pause");
                     simpleTimer.setBase(elapsedRealtime() - pauseOffset);
                     simpleTimer.start();
-
                     running = true;
-                } else if (running && (btn.getText().toString().trim().equals("Pause"))) {
-                    btn.setText("Start");
-                    simpleTimer.stop();
-                    pauseOffset = elapsedRealtime() - simpleTimer.getBase();
-//            long pausedSession = newSession.getPauseTime(SystemClock.setCurrentTimeMillis());
-                    running = false;
-                }
+                    started = true;
 
+                    newSession.start();
+                } else if (running && (buttonStart.getText().toString().trim().equals("Pause"))) {
+                    buttonStart.setText("Start");
+                    pauseOffset = elapsedRealtime() - simpleTimer.getBase();
+                    simpleTimer.stop();
+                    running = false;
+
+                    newSession.pause();
+                }
             }
         });
     }
 
     public void stopTimer(View view) {
-//        long sessionSave = newSession.setEndTime(SystemClock.elapsedRealtime(), newSession);
-//        Timestamp sessionSave = newSession.setEndTime(SystemClock.elapsedRealtime());
-
         //     stops the timer and clears the paused hold so it will truly reset
-        simpleTimer.setBase(SystemClock.elapsedRealtime());
+        buttonStart.setText("Start");
+        simpleTimer.stop();
         pauseOffset = 0;
+        running = false;
+
+        newSession.stop();
+        sessionList.addSession(newSession);
     }
 }

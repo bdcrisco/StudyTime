@@ -43,6 +43,7 @@ public class AddSessionActivity extends AppCompatActivity {
 
         events.add(new EventDay(calendar, R.drawable.event_exists));
         calendarView.setEvents(events);
+
 //          click handling
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override

@@ -10,56 +10,53 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.applandeo.materialcalendarview.CalendarView;
+import com.applandeo.materialcalendarview.DatePicker;
 import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.builders.DatePickerBuilder;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarActivity extends AppCompatActivity {
     com.applandeo.materialcalendarview.CalendarView calendarView;
-    EventDay currentDay;
+    List<EventDay> events;
+
     SessionList sessionList = SessionList.getInstance();
 
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
     TextView myDate;
-    String date;
-    Button getTime;
-    int hour,  min;
-//    declare the spinner
-//    private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        // view linking
         calendarView = findViewById(R.id.Calendar);
         myDate = findViewById(R.id.dayLabel);
 
-//        myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
+        // Events for the calendar view
+        events = new ArrayList<>();
+        events.add(new EventDay(calendar, R.drawable.event_exists));
+        calendarView.setEvents(events);
 
-
-        OnDayClickListener onDayClick = new OnDayClickListener() {
+        // Date information for the TextView (also tells us what day is selected, will need later)
+        myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
-            Calendar clickedDayCalendar = eventDay.getCalendar();
-            long timeStop = clickedDayCalendar.getTimeInMillis();
-            myDate.setText(Math.toIntExact((long) timeStop));
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+                myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
             }
-        };
+        });
     }
-
-//    private OnSelectDateListener listener = new OnSelectDateListener() {
-//        @Override
-//        public void onSelect(List<Calendar> calendars) {
-//            DatePickerBuilder builder = new DatePickerBuilder(this, listener)
-//                    .pickerType(CalendarView.ONE_DAY_PICKER);
-//// .date(Calendar.getInstance()) // Initial date as Calendar object
-//            DatePicker datePicker = builder.build();
-//            datePicker.show();
-//        }
-//    };
-
 
     public void moveToTimer(View view) {
         Intent intent = new Intent(this, MainActivity.class);

@@ -4,8 +4,11 @@ import android.os.SystemClock;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class Session {
     private Timestamp startTime;
@@ -50,12 +53,15 @@ public class Session {
         return new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(startTime);
     }
     public String getTime() {
-        String timeFrame = new SimpleDateFormat("h:mm a", java.util.Locale.getDefault()).format(startTime)
-                + " - " +  new SimpleDateFormat("h:mm a", java.util.Locale.getDefault()).format(endTime);
-        long eTime = endTime.getTime() - startTime.getTime();
-        int hours = (int) (eTime / 3600);
-        int minutes = (int) (eTime % 3600);
-        String elTime = String.format("%o:%02ohrs", hours, minutes);
+        String timeFrame = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(startTime)
+                + " - " +  new SimpleDateFormat("h:mm a", Locale.getDefault()).format(endTime);
+        Long eTime = endTime.getTime() - startTime.getTime();
+
+        int hours = (int) (eTime / 3600000);
+        int minutes = (int) (eTime / 60000) % 60;
+        int seconds = (int) (eTime / 1000) % 60;
+        String elTime = String.format("%d:%02d hrs", hours, minutes);
+
 
         return timeFrame + " : " + elTime;
     }
@@ -73,10 +79,18 @@ public class Session {
     public void setCourse(String course) {
         this.course = new Course(course);
     }
+
+    public void start() {
+        startTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
+    }
+    public void stop() {
+        endTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
+    }
     public void pause() {
-            pauseTime.add(new Timestamp(SystemClock.elapsedRealtime()));
+            pauseTime.add(new Timestamp(Calendar.getInstance().getTimeInMillis()));
             isPaused = !isPaused;
     }
+
 //created when trying to use setEndTime in MainActivity
 //    public Timestamp setEndTime(long elapsedRealtime, Session newSession) {
 //    }

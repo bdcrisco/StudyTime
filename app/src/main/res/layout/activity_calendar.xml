@@ -28,29 +28,31 @@
         app:selectionColor="@color/themeOrange"
         app:selectionLabelColor="@color/themeWhite"
         app:todayLabelColor="@color/themeOrange"
-        app:type="one_day_picker">
+        app:type="one_day_picker"
+        app:eventsEnabled="true">
     </com.applandeo.materialcalendarview.CalendarView>
 
     <Button
         android:id="@+id/switch_listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="652dp"
+        android:layout_marginTop="8dp"
         android:onClick="moveToRecycler"
         android:text="@string/move_to_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/to_timer_a"
+        app:layout_constraintTop_toBottomOf="@+id/Calendar" />
 
     <Button
         android:id="@+id/to_timer_a"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:onClick="moveToTimer"
         android:text="@string/move_to_timer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBaseline_toBaselineOf="@+id/switch_listview"
+        app:layout_constraintEnd_toStartOf="@+id/switch_listview"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -58,11 +60,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginBottom="11dp"
         android:text="@string/myDate"
-        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Calendar" />
+        app:layout_constraintTop_toBottomOf="@+id/Calendar"
+        app:layout_constraintVertical_bias="0.129" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
