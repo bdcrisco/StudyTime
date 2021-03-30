@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     public void stopTimer(View view) {
         //     stops the timer and clears the paused hold so it will truly reset
         buttonStart.setText("Start");
+        simpleTimer.setBase(elapsedRealtime());
         simpleTimer.stop();
         pauseOffset = 0;
         running = false;
