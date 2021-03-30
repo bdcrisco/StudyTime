@@ -5,8 +5,10 @@ import android.content.Context;
 import android.view.View;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileHelper {

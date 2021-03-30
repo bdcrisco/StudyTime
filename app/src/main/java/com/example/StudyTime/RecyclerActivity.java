@@ -20,11 +20,13 @@ public class RecyclerActivity extends AppCompatActivity {
     //private List<Session> localList;
     private RecyclerView rvSessions;
     private static final String tAG = "MainActivity";
+//    private FileHelper fileHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
+//        fileHelper = new FileHelper("sessions");
         init();
         generateData();
         setData();
