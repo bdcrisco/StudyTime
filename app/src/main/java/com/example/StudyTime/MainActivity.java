@@ -22,13 +22,14 @@ import static android.os.SystemClock.elapsedRealtime;
 
 public class MainActivity extends AppCompatActivity {
 
+    SessionList sessionList;
+
+    Session newSession;
+
     private Chronometer simpleTimer;
     private boolean running;
-    private boolean started = false;
     private long pauseOffset; // use to calculate time paused
-    FileHelper fileHelper;
-    Session newSession;
-    SessionList sessionList;
+
     Button buttonStart;
     Button buttonStop;
 
@@ -36,14 +37,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         buttonStop = findViewById(R.id.stopButton);
 
         sessionList = SessionList.getInstance();
+        sessionList.initialize(this.getApplicationContext());
         newSession = new Session();
-
-        fileHelper = new FileHelper(this, "session_list");
-        fileHelper.createFile();
 
         // initiate views
         simpleTimer = findViewById(R.id.simpleTimer);
@@ -87,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                     simpleTimer.setBase(elapsedRealtime() - pauseOffset);
                     simpleTimer.start();
                     running = true;
-                    started = true;
 
                     newSession.start();
                 } else if (running && (buttonStart.getText().toString().trim().equals("Pause"))) {
@@ -104,13 +101,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void stopTimer(View view) {
         //     stops the timer and clears the paused hold so it will truly reset
-        buttonStart.setText("Start");
-        simpleTimer.setBase(elapsedRealtime());
-        simpleTimer.stop();
-        pauseOffset = 0;
-        running = false;
+        if (running == true) {
+            buttonStart.setText("Start");
+            simpleTimer.setBase(elapsedRealtime());
+            simpleTimer.stop();
+            pauseOffset = 0;
+            running = false;
 
-        newSession.stop();
-        sessionList.addSession(newSession);
+            newSession.stop();
+            sessionList.addSession(newSession);
+        }
     }
 }

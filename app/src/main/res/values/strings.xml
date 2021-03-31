@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">StudyTime</string>
+    <string name="timer_name">Timer</string>
+    <string name="calendar_name">Calendar</string>
+    <string name="session_list_name">Session List</string>
+    <string name="add_session_name">Add Session</string>
     <string name="move_to_calendar">Calendar</string>
     <string name="move_to_timer">Timer</string>
     <string name="move_to_list">List View</string>
