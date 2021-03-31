@@ -5,9 +5,6 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 // An eagerly created singleton for the users session list
@@ -51,8 +48,12 @@ public class SessionList {
     }
 
     public void loadSessions() {
+        sessionFH.createFile();
         Gson gson = new Gson();
-        sessionList = gson.fromJson(sessionFH.readFromFile(), new TypeToken<LinkedList<Session>>(){}.getType());
+        if (sessionFH.fileExists()) {
+            sessionList = gson.fromJson(sessionFH.readFromFile(), new TypeToken<LinkedList<Session>>() {
+            }.getType());
+        }
     }
 
     public List<Session> getList() {
