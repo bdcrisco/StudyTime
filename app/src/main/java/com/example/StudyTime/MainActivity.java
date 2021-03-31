@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         sessionList = SessionList.getInstance();
         sessionList.initialize(this.getApplicationContext());
+
         newSession = new Session();
 
         // initiate views
