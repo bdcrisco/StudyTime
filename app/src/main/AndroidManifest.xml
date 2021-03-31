@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyTime">
-        <activity android:name="com.example.StudyTime.AddSessionActivity"></activity>
-        <activity android:name="com.example.StudyTime.RecyclerActivity" />
-        <activity android:name="com.example.StudyTime.CalendarActivity" />
-        <activity android:name="com.example.StudyTime.MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/Theme.StudyTime.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

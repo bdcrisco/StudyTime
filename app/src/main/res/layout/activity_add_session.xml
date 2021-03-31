@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_session"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.StudyTime.AddSessionActivity">
+    tools:context="com.example.StudyTime.AddSessionFragment">
+
 
     <Button
         android:id="@+id/return_to_previous"
@@ -41,21 +43,20 @@
         app:abbreviationsLabelsColor="@color/themeDarkBlue"
         app:anotherMonthsDaysLabelsColor="@color/themeBlueGrey"
         app:daysLabelsColor="@color/themeDarkBlue"
+        app:eventsEnabled="true"
         app:headerColor="@color/themeDarkBlue"
         app:headerLabelColor="@color/themeBlueGrey"
         app:highlightedDaysLabelsColor="@color/themeBlueGrey"
-        app:pagesColor="@color/themeWhite"
-        app:selectionColor="@color/themeOrange"
-        app:selectionLabelColor="@color/themeWhite"
-        app:todayLabelColor="@color/themeOrange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:type="one_day_picker"
-        app:eventsEnabled="true">
-    </com.applandeo.materialcalendarview.CalendarView>
+        app:pagesColor="@color/themeWhite"
+        app:selectionColor="@color/themeOrange"
+        app:selectionLabelColor="@color/themeWhite"
+        app:todayLabelColor="@color/themeOrange"
+        app:type="one_day_picker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

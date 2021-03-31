@@ -1,10 +1,12 @@
 package com.example.StudyTime;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 //import com.example.recycler.model.Session;
 //import com.example.recycler.ui.SessionViewHolder;
@@ -35,6 +37,14 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> {
         holder.setDate(localList.get(position).getDate());
         holder.setCourseName(localList.get(position).getCourse().getCourseName());
         holder.setTime(localList.get(position).getTime());
+
+        if(position%2 ==0) {
+            //holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.md_light_blue_800));
+        }
+        else{
+            holder.itemView.setBackgroundColor(Color.parseColor("#800080"));
+        }
     }
 
     @Override

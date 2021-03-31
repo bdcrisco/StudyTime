@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calendar_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.StudyTime.CalendarActivity">
+    tools:context="com.example.StudyTime.CalendarFragment">
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/Calendar"
@@ -28,22 +29,21 @@
         app:selectionColor="@color/themeOrange"
         app:selectionLabelColor="@color/themeWhite"
         app:todayLabelColor="@color/themeOrange"
-        app:type="one_day_picker">
-    </com.applandeo.materialcalendarview.CalendarView>
+        app:type="one_day_picker"></com.applandeo.materialcalendarview.CalendarView>
 
-<!--    <CalendarView-->
-<!--        android:id="@+id/addSessionCalendar"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="350dp"-->
-<!--        android:background="@drawable/bg_calendar"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.495"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/switch_listview"-->
-<!--        app:layout_constraintVertical_bias="0.717">-->
+    <!--    <CalendarView-->
+    <!--        android:id="@+id/addSessionCalendar"-->
+    <!--        android:layout_width="300dp"-->
+    <!--        android:layout_height="350dp"-->
+    <!--        android:background="@drawable/bg_calendar"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/to_timer_a"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.495"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/switch_listview"-->
+    <!--        app:layout_constraintVertical_bias="0.717">-->
 
-<!--    </CalendarView>-->
+    <!--    </CalendarView>-->
 
     <Button
         android:id="@+id/switch_listview"
