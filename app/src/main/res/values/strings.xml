@@ -19,6 +19,7 @@
     <string name="course_prompt">Choose a course:</string>
     <string name="choose_course">Choose Course</string>
     <string name="saveStoppedTime">saveStoppedTime</string>
+    <string name="saveCourse">Save Course</string>
 
     <string-array name="course_array">
         <item>CS 246</item>

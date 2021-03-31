@@ -1,22 +1,18 @@
 package com.example.StudyTime;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.TableLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Timer;
+import java.util.List;
 
 import static android.os.SystemClock.elapsedRealtime;
 
@@ -26,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean running;
     private boolean started = false;
     private long pauseOffset; // use to calculate time paused
+    private Spinner spinnerCourse;
     FileHelper fileHelper;
     Session newSession;
     SessionList sessionList;
     Button buttonStart;
     Button buttonStop;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         simpleTimer = findViewById(R.id.simpleTimer);
         simpleTimer.setFormat("Time: %s");
         simpleTimer.setBase(elapsedRealtime());
+        addCourseSpinner(); // courses spinner
+        addListenerOnButton();
 
         simpleTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -113,4 +113,41 @@ public class MainActivity extends AppCompatActivity {
         newSession.stop();
         sessionList.addSession(newSession);
     }
+
+
+//    addCourseSpinner();
+//    addListenerOnButton();
+    public void addCourseSpinner(){
+        spinnerCourse = (Spinner) findViewById(R.id.spinnerCourse);
+        List<String> courses = new ArrayList<String>();
+        courses.add("Select your course:");
+        courses.add("CS246");
+        courses.add("BIO101");
+        courses.add("REL275");
+
+        //create a adapter for the spinner and set that to the spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, courses);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCourse.setAdapter(dataAdapter);
+    }
+    public void addListenerOnButton() {
+
+//        spinnerCourse = (Spinner) findViewById(R.id.spinner1);
+        Button btnChooseCourse = (Button) findViewById(R.id.btnSubmit);
+
+        btnChooseCourse.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,
+                        "You Chose : " +
+                                "\nCourse : "+ String.valueOf(spinnerCourse.getSelectedItem()) +
+                                "\nTime : ",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
 }
+
