@@ -11,35 +11,38 @@
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/choose_course"
-        app:layout_constraintBottom_toTopOf="@+id/return_to_previous"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentDate"
-        app:layout_constraintVertical_bias="0.88" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/return_to_previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="24dp"
         android:onClick="moveToTimer"
         android:text="@string/return_to_previous"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+        app:layout_constraintHorizontal_bias="0.212"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/currentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:text="@string/addSessionDate"
         android:textColor="@color/themeDarkBlue"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addSessionCalendar" />
 
@@ -68,27 +71,28 @@
     </com.applandeo.materialcalendarview.CalendarView>
 
     <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="104dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginBottom="192dp"
+        android:id="@+id/spinnerCourse"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="212dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addSessionCalendar" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="104dp"
-        android:layout_height="16dp"
-        android:layout_marginBottom="192dp"
-        android:entries="@array/course_array"
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="272dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:prompt="@string/course_prompt"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.805"
-        app:layout_constraintStart_toEndOf="@+id/spinner2" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCourse" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

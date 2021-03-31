@@ -1,13 +1,10 @@
 package com.example.StudyTime;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-
-import static android.os.SystemClock.elapsedRealtime;
 
 public class Session {
     private long startTime;
