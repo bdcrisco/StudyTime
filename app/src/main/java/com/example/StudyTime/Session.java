@@ -1,49 +1,48 @@
 package com.example.StudyTime;
 
-import android.os.SystemClock;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static android.os.SystemClock.elapsedRealtime;
+
 public class Session {
-    private Timestamp startTime;
-    private Timestamp endTime;
-    private List<Timestamp> pauseTime = new ArrayList<>();
+    private long startTime;
+    private long endTime;
+    private List<Long> pauseTime = new ArrayList<>();
     Course course;
 
     private static boolean isPaused = false;
 
     // Constructors
     public Session() {
-        startTime = new Timestamp(SystemClock.elapsedRealtime());
+        startTime = Calendar.getInstance().getTimeInMillis();
         course = new Course("Default");
     }
     public Session(Course course) {
-        startTime = new Timestamp(SystemClock.elapsedRealtime());
+        startTime = Calendar.getInstance().getTimeInMillis();
         this.course = course;
     }
-    public Session(Timestamp startTime, Timestamp endTime, Course course) {
+    public Session(long startTime, long endTime, Course course) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.course = course;
     }
 
     // Getters
-    public Timestamp getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
-    public Timestamp getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
     public Course getCourse() {
         return course;
     }
-    public List<Timestamp> getPauseTime() {
+    public List<Long> getPauseTime() {
         return pauseTime;
     }
     public boolean getPause() {
@@ -55,24 +54,13 @@ public class Session {
     public String getTime() {
         String timeFrame = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(startTime)
                 + " - " +  new SimpleDateFormat("h:mm a", Locale.getDefault()).format(endTime);
-        Long eTime = endTime.getTime() - startTime.getTime();
-
-        int hours = (int) (eTime / 3600000);
-        int minutes = (int) (eTime / 60000) % 60;
-        int seconds = (int) (eTime / 1000) % 60;
-        String elTime = String.format("%d:%02d hrs", hours, minutes);
-
-
-        return timeFrame + " : " + elTime;
+        return timeFrame + " : " + getElapsedTime();
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
-    public Timestamp setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
-        return endTime;
-    }
+    public void setEndTime(long endTime) { this.endTime = endTime; }
     public void setCourse(Course course) {
         this.course = course;
     }
@@ -80,18 +68,20 @@ public class Session {
         this.course = new Course(course);
     }
 
-    public void start() {
-        startTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
-    }
-    public void stop() {
-        endTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
-    }
+    public void start() { startTime = Calendar.getInstance().getTimeInMillis(); }
+    public void stop() { endTime = Calendar.getInstance().getTimeInMillis(); }
     public void pause() {
-            pauseTime.add(new Timestamp(Calendar.getInstance().getTimeInMillis()));
+            pauseTime.add(Calendar.getInstance().getTimeInMillis());
             isPaused = !isPaused;
     }
 
-//created when trying to use setEndTime in MainActivity
-//    public Timestamp setEndTime(long elapsedRealtime, Session newSession) {
-//    }
+    private String getElapsedTime() {
+        long eTime = endTime - startTime;
+        int hours = (int) (eTime / 3600000);
+        int minutes = (int) (eTime / 60000) % 60;
+        int seconds = (int) (eTime / 1000) % 60;
+
+        // formats the string in the way the user likes
+        return String.format("%d:%02d hrs", hours, minutes);
+    }
 }
