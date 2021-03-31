@@ -3,6 +3,7 @@ package com.example.StudyTime;
 import android.content.Context;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class FileHelper {
         String contents = "";
         try {
             Scanner myReader = new Scanner(dir);
-            contents = myReader.nextLine();
+            if (myReader.hasNextLine()) { contents = myReader.nextLine(); }
             myReader.close();
         } catch (IOException e) {
             System.out.println("An error occurred. Could not read from file");
@@ -56,5 +57,19 @@ public class FileHelper {
         }
 
         return contents;
+    }
+
+    public boolean fileExists() {
+        Scanner sc = null;
+        try {
+            sc = new Scanner(dir);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (sc.hasNextLine()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
