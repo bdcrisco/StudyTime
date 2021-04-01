@@ -3,7 +3,6 @@ package com.example.StudyTime;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -84,7 +83,7 @@ public class CalendarFragment extends Fragment {
     }
 
     public void moveToRecycler(View view) {
-        Intent intent = new Intent(getActivity(), RecyclerActivity.class);
+        Intent intent = new Intent(getActivity(), RecyclerFragment.class);
         startActivity(intent);
     }
 

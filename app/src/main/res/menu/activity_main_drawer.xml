@@ -20,9 +20,15 @@
             android:tint="@color/themeOrange"
             android:title="@string/calendar_view" />
         <item
+            android:id="@+id/recycler_view"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
+            android:tint="@color/themeOrange"
+            android:title="@string/recycler" />
+        <item
             android:id="@+id/settings_view"
             android:icon="@drawable/ic_menu_manage"
             android:tint="@color/themeOrange"
             android:title="@string/settings" />
+
     </group>
 </menu>

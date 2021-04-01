@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
          else if (menuID == R.id.settings_view){
             viewPager.setCurrentItem(3);
         }
+        else if (menuID == R.id.recycler_view){
+            viewPager.setCurrentItem(4);
+        }
     }
 
     private class PagerAdapter extends FragmentStateAdapter {
@@ -126,12 +129,15 @@ public class MainActivity extends AppCompatActivity {
             else if (position == 3){
                 fragment = new SettingsFragment();
             }
+            else if (position == 4){
+                fragment = new RecyclerFragment();
+            }
             return fragment;
         }
         @Override
         public int getItemCount() {
             /* The number of fragments managed by the adapter */
-            return 4;
+            return 5;
         }
     }
 

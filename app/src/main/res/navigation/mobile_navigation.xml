@@ -28,4 +28,10 @@
         android:name="com.example.StudyTime.HomeFragment"
         android:label="Home"
         tools:layout="@layout/activity_home" />
+
+    <fragment
+        android:id="@+id/nav_recycler"
+        android:name="com.example.StudyTime.RecyclerFragment"
+        android:label="List View"
+        tools:layout="@layout/activity_recycler" />
 </navigation>
