@@ -1,6 +1,8 @@
 package com.example.StudyTime;
 
 import android.content.Context;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -33,17 +38,33 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.os.SystemClock.elapsedRealtime;
+
 public class MainActivity extends AppCompatActivity {
+
+    SessionList sessionList;
+
+    Session newSession;
+
+    private Chronometer simpleTimer;
     private boolean running;
     private Chronometer simpleTimer;
     private View rootView;
     private long pauseOffset; // use to calculate time paused
+    private Spinner spinnerCourse;
+    FileHelper fileHelper;
 
     ViewPager2 viewPager;
 
     private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
     NavigationView navigationView;
+
+    Button buttonStart;
+    Button buttonStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +99,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+        buttonStop = findViewById(R.id.stopButton);
 
+        sessionList = SessionList.getInstance();
+        sessionList.initialize(this.getApplicationContext());
+
+        newSession = new Session();
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -86,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+        // initiate views
+        simpleTimer = findViewById(R.id.simpleTimer);
+        simpleTimer.setFormat("Time: %s");
+        simpleTimer.setBase(elapsedRealtime());
+        addCourseSpinner(); // courses spinner
+        addListenerOnButton();
 
 
 
@@ -128,6 +160,15 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (position == 3){
                 fragment = new SettingsFragment();
+        simpleTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                if ((elapsedRealtime() - chronometer.getBase())>= 60000){
+//                line below would stop the clock at the above set time (maybe after set amount of hours)
+//                chronometer.setBase(SystemClock.elapsedRealtime());
+//                give a message at the above time (maybe a time to take a quick break)
+                    Toast.makeText(MainActivity.this, "Great Start, 1 minute down!", Toast.LENGTH_SHORT).show();
+                }
             }
             else if (position == 4){
                 fragment = new RecyclerFragment();
@@ -145,13 +186,82 @@ public class MainActivity extends AppCompatActivity {
         drawer.openDrawer(GravityCompat.START);
     }
 
-    public void startTimer(View view) {
-        // if not running this will start the timer (and subtract the time from stopped/paused)
-        if (!running){
-            simpleTimer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-            simpleTimer.start();
-            running = true;
+
+    public void startPauseTimer(View view) {
+//        figure out how to change name of button based on bool running or !running
+        buttonStart = (Button)findViewById(R.id.startButton);
+        buttonStart.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                if (!running && (buttonStart.getText().toString().trim().equals("Start"))) {
+                    buttonStart.setText("Pause");
+                    simpleTimer.setBase(elapsedRealtime() - pauseOffset);
+                    simpleTimer.start();
+                    running = true;
+
+                    newSession.start();
+                } else if (running && (buttonStart.getText().toString().trim().equals("Pause"))) {
+                    buttonStart.setText("Start");
+                    pauseOffset = elapsedRealtime() - simpleTimer.getBase();
+                    simpleTimer.stop();
+                    running = false;
+
+                    newSession.pause();
+                }
+            }
+        });
+    }
+
+    public void stopTimer(View view) {
+        //     stops the timer and clears the paused hold so it will truly reset
+        if (running == true) {
+            buttonStart.setText("Start");
+            simpleTimer.setBase(elapsedRealtime());
+            simpleTimer.stop();
+            pauseOffset = 0;
+            running = false;
+
+            newSession.stop();
+            sessionList.addSession(newSession);
         }
     }
 
+
+//    addCourseSpinner();
+//    addListenerOnButton();
+    public void addCourseSpinner(){
+        spinnerCourse = (Spinner) findViewById(R.id.spinnerCourse);
+        List<String> courses = new ArrayList<String>();
+        courses.add("Select your course:");
+        courses.add("CS246");
+        courses.add("BIO101");
+        courses.add("REL275");
+
+        //create a adapter for the spinner and set that to the spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, courses);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCourse.setAdapter(dataAdapter);
+    }
+    public void addListenerOnButton() {
+
+//        spinnerCourse = (Spinner) findViewById(R.id.spinner1);
+        Button btnChooseCourse = (Button) findViewById(R.id.btnSubmit);
+
+        btnChooseCourse.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,
+                        "You Chose : " +
+                                "\nCourse : "+ String.valueOf(spinnerCourse.getSelectedItem()) +
+                                "\nTime : ",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
 }
+

@@ -12,7 +12,9 @@
         android:id="@+id/return_to_previous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="24dp"
         android:onClick="moveToTimer"
         android:text="@string/return_to_previous"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -24,13 +26,13 @@
         android:id="@+id/currentDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:text="@string/addSessionDate"
         android:textColor="@color/themeDarkBlue"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.825"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addSessionCalendar" />
 
@@ -47,16 +49,40 @@
         app:headerColor="@color/themeDarkBlue"
         app:headerLabelColor="@color/themeBlueGrey"
         app:highlightedDaysLabelsColor="@color/themeBlueGrey"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:pagesColor="@color/themeWhite"
         app:selectionColor="@color/themeOrange"
         app:selectionLabelColor="@color/themeWhite"
         app:todayLabelColor="@color/themeOrange"
-        app:type="one_day_picker" />
+        app:type="one_day_picker">
+
+    </com.applandeo.materialcalendarview.CalendarView>
+
+    <Spinner
+        android:id="@+id/spinnerCourse"
+        android:layout_width="200dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="212dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addSessionCalendar" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="272dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCourse" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

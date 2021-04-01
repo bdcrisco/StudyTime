@@ -1,8 +1,10 @@
 package com.example.StudyTime;
 
-import com.google.gson.Gson;
+import android.content.Context;
 
-import java.sql.Timestamp;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.LinkedList;
 import java.util.List;
 // An eagerly created singleton for the users session list
@@ -12,18 +14,26 @@ public class SessionList {
 
     // other instance variables can be here
     List<Session> sessionList = new LinkedList<>();
+    FileHelper sessionFH;
+    Context context;
 
     private SessionList(){
-        addSession(new Session(new Timestamp(1616461188499L), new Timestamp(1616461188499L), new Course ("BIO101")));
+//        addSession(new Session(1616461188499L, 1616465188499L, new Course ("BIO101")));
     }
 
     public static SessionList getInstance() {
         return(INSTANCE);
     }
+    public void initialize(Context context) {
+        this.context = context;
+        sessionFH = new FileHelper(this.context, "session_list");
+        loadSessions();
+    }
 
     // other instance methods can follow
     public void addSession(Session addMe) {
         sessionList.add(addMe);
+        saveSessions();
     }
     public void addSession(List<Session> addMe) {
         sessionList.addAll(addMe);
@@ -33,11 +43,24 @@ public class SessionList {
         Gson gson = new Gson();
         String sessionListJson = gson.toJson(sessionList);
 
-//        createFile("sessions.txt");
-//        writeToFile("sessions.txt", sessionListJson);
+        sessionFH.createFile();
+        sessionFH.writeToFile(sessionListJson);
+    }
+
+    public void loadSessions() {
+        sessionFH.createFile();
+        Gson gson = new Gson();
+        if (sessionFH.fileExists()) {
+            sessionList = gson.fromJson(sessionFH.readFromFile(), new TypeToken<LinkedList<Session>>() {
+            }.getType());
+        }
     }
 
     public List<Session> getList() {
         return sessionList;
+    }
+
+    private void sort() {
+        //TODO
     }
 }

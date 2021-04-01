@@ -13,11 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -30,7 +34,8 @@ public class CalendarFragment extends Fragment {
     }
     //----
     com.applandeo.materialcalendarview.CalendarView calendarView;
-    EventDay currentDay;
+    List<EventDay> events;
+
     SessionList sessionList = SessionList.getInstance();
 
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
@@ -51,8 +56,21 @@ public class CalendarFragment extends Fragment {
 
             myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
 
+        // Events for the calendar view
+        events = new ArrayList<>();
+        events.add(new EventDay(calendar, R.drawable.event_exists));
+        calendarView.setEvents(events);
             createEventOnCalendar();
 
+        // Date information for the TextView (also tells us what day is selected, will need later)
+        myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
+        calendarView.setOnDayClickListener(new OnDayClickListener() {
+            @Override
+            public void onDayClick(EventDay eventDay) {
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+                myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
+            }
+        });
             OnDayClickListener onDayClick = new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {

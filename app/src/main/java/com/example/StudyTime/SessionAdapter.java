@@ -37,13 +37,10 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> {
         holder.setDate(localList.get(position).getDate());
         holder.setCourseName(localList.get(position).getCourse().getCourseName());
         holder.setTime(localList.get(position).getTime());
-
-        if(position%2 ==0) {
-            //holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.md_light_blue_800));
-        }
-        else{
-            holder.itemView.setBackgroundColor(Color.parseColor("#800080"));
+        if(position% 2 == 0){
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.themeWhite));
+        }else {
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.themeBlueGrey));
         }
     }
 
