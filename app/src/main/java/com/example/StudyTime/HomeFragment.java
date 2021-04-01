@@ -31,7 +31,8 @@ public class HomeFragment extends Fragment {
         rootView = null;
     }
 
-    SessionList sessionList;
+    SessionList sessionList = SessionList.getInstance();
+    CourseList courseList = CourseList.getInstance();
     Session newSession;
     private long pauseOffset; // use to calculate time paused
     private Spinner spinnerCourse;
@@ -48,8 +49,14 @@ public class HomeFragment extends Fragment {
             rootView = inflater.inflate(R.layout.activity_home, container, false);
 
             buttonStop = rootView.findViewById(R.id.stopButton);
-            sessionList = SessionList.getInstance();
+
             sessionList.initialize(getContext().getApplicationContext());
+            courseList.initialize(getContext().getApplicationContext());
+
+//            courseList.addCourse("Select your course:");
+//            courseList.addCourse("CS246");
+//            courseList.addCourse("BIO101");
+//            courseList.addCourse("REL275");
 
             newSession = new Session();
 
@@ -66,19 +73,6 @@ public class HomeFragment extends Fragment {
             simpleTimer = (Chronometer) rootView.findViewById(R.id.simpleTimer);
             simpleTimer.setFormat("Time: %s");
             simpleTimer.setBase(SystemClock.elapsedRealtime());
-
-            simpleTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-                @Override
-                public void onChronometerTick(Chronometer chronometer) {
-                    if ((SystemClock.elapsedRealtime() - chronometer.getBase()) >= 60000) {
-//                line below would stop the clock at the above set time (maybe after set amount of hours)
-//                chronometer.setBase(SystemClock.elapsedRealtime());
-//                give a message at the above time (maybe a time to take a quick break)
-                        Toast.makeText(getActivity(), "Great Start, 1 minute down!", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
         }
         return rootView;
     }
@@ -123,20 +117,16 @@ public class HomeFragment extends Fragment {
                     running = false;
 
                     newSession.stop();
+                    newSession.setCourse(new Course(spinnerCourse.getSelectedItem().toString()));
                     sessionList.addSession(newSession);
                 }
             }
         });
     }
 
-
     public void addCourseSpinner() {
         spinnerCourse = (Spinner) rootView.findViewById(R.id.spinnerCourse);
-        List<String> courses = new ArrayList<String>();
-        courses.add("Select your course:");
-        courses.add("CS246");
-        courses.add("BIO101");
-        courses.add("REL275");
+        List<String> courses = courseList.getStringList();
 
         //create a adapter for the spinner and set that to the spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(),
@@ -144,7 +134,5 @@ public class HomeFragment extends Fragment {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourse.setAdapter(dataAdapter);
     }
-
-
 }
 
