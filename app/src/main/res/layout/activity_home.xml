@@ -23,7 +23,6 @@
             android:layout_below="@+id/appTitle"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="32dp"
-            android:onClick="startPauseTimer"
             android:text="@string/startButton"
             app:layout_constraintEnd_toStartOf="@+id/stopButton"
             app:layout_constraintHorizontal_bias="0.5"
@@ -35,7 +34,6 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:onClick="stopTimer"
             android:text="@string/stopButton"
             app:layout_constraintBaseline_toBaselineOf="@+id/startButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,18 +80,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/startButton" />
-
-
-
-
-
-
-
-
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

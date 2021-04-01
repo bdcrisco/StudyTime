@@ -59,6 +59,8 @@ public class HomeFragment extends Fragment {
             simpleTimer.setBase(elapsedRealtime());
             addCourseSpinner(); // courses spinner
 
+            setStartPauseTimer();
+            setStopTimer();
 
             // initiate views
             simpleTimer = (Chronometer) rootView.findViewById(R.id.simpleTimer);
@@ -81,11 +83,10 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-    public void startPauseTimer(View view) {
+    public void setStartPauseTimer() {
 //        figure out how to change name of button based on bool running or !running
         buttonStart = (Button) rootView.findViewById(R.id.startButton);
         buttonStart.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
 
@@ -108,18 +109,24 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    public void stopTimer(View view) {
+    public void setStopTimer() {
         //     stops the timer and clears the paused hold so it will truly reset
-        if (running == true) {
-            buttonStart.setText("Start");
-            simpleTimer.setBase(elapsedRealtime());
-            simpleTimer.stop();
-            pauseOffset = 0;
-            running = false;
+        buttonStop =  (Button) rootView.findViewById(R.id.stopButton);
+        buttonStop.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (running == true) {
+                    buttonStart.setText("Start");
+                    simpleTimer.setBase(elapsedRealtime());
+                    simpleTimer.stop();
+                    pauseOffset = 0;
+                    running = false;
 
-            newSession.stop();
-            sessionList.addSession(newSession);
-        }
+                    newSession.stop();
+                    sessionList.addSession(newSession);
+                }
+            }
+        });
     }
 
 

@@ -27,23 +27,18 @@ import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarFragment extends Fragment {
-
-    //from CatFragment---
     private View rootView;
         public CalendarFragment(){
         rootView = null;
     }
-    //----
+
     com.applandeo.materialcalendarview.CalendarView calendarView;
     List<EventDay> events;
-
+    EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
 
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
     TextView myDate;
-    String date;
-
-    //from CatFragment---
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         if (rootView ==null){
