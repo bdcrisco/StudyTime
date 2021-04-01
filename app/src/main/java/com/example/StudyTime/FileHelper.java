@@ -25,10 +25,10 @@ public class FileHelper {
             if (dir.createNewFile()) {
                 System.out.println("File created: " + dir.getName());
             } else {
-                System.out.println("File already exists.");
+                System.out.println("File: " + dir.getName() + " already exists.");
             }
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred. Could not create file: " + dir.getName());
             e.printStackTrace();
         }
     }
@@ -38,9 +38,9 @@ public class FileHelper {
             FileWriter myWriter = new FileWriter(dir);
             myWriter.write(contents);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            System.out.println("Successfully wrote to the file: " + dir.getName());
         } catch (IOException e) {
-            System.out.println("An error occurred. Could not write to file");
+            System.out.println("An error occurred. Could not write to file: " + dir.getName());
             e.printStackTrace();
         }
     }
@@ -51,8 +51,9 @@ public class FileHelper {
             Scanner myReader = new Scanner(dir);
             if (myReader.hasNextLine()) { contents = myReader.nextLine(); }
             myReader.close();
+            System.out.println("Successfully read from file: " + dir.getName());
         } catch (IOException e) {
-            System.out.println("An error occurred. Could not read from file");
+            System.out.println("An error occurred. Could not read from file: " + dir.getName());
             e.printStackTrace();
         }
 

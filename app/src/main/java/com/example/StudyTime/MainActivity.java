@@ -19,14 +19,15 @@ import static android.os.SystemClock.elapsedRealtime;
 public class MainActivity extends AppCompatActivity {
 
     SessionList sessionList;
+    CourseList courseList;
 
     Session newSession;
+    Course newCourse;
 
     private Chronometer simpleTimer;
     private boolean running;
     private long pauseOffset; // use to calculate time paused
     private Spinner spinnerCourse;
-    FileHelper fileHelper;
 
     Button buttonStart;
     Button buttonStop;
@@ -39,8 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
         sessionList = SessionList.getInstance();
         sessionList.initialize(this.getApplicationContext());
+        courseList = CourseList.getInstance();
+        courseList.initialize(this.getApplicationContext());
 
         newSession = new Session();
+        newCourse = new Course("CS 246");
+
+        courseList.addCourse(newCourse);
 
         // initiate views
         simpleTimer = findViewById(R.id.simpleTimer);
