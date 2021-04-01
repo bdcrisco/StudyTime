@@ -7,28 +7,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.StudyTime.RecyclerFragment">
 
-    <Button
-        android:id="@+id/switch_calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:onClick="moveToCalendar"
-        android:text="@string/move_to_calendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/to_timer_b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:onClick="moveToTimer"
-        android:text="@string/move_to_timer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_sessions"

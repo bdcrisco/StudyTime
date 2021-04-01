@@ -1,4 +1,5 @@
 package com.example.StudyTime;
+//TODO: Merge with CalendarActivity
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -52,7 +53,7 @@ public class CalendarFragment extends Fragment {
             rootView = inflater.inflate(R.layout.activity_calendar, container, false);
 
             calendarView = (com.applandeo.materialcalendarview.CalendarView) rootView.findViewById(R.id.Calendar);
-            myDate = (TextView) rootView.findViewById(R.id.myDate);
+            myDate = (TextView) rootView.findViewById(R.id.dayLabel);
 
             myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
 

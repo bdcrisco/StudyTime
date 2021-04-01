@@ -10,15 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyTime">
 
-        <activity android:name="com.example.StudyTime.AddSessionActivity"
-            android:label="@string/add_session_name"/>
-        <activity android:name="com.example.StudyTime.RecyclerActivity"
-            android:label="@string/session_list_name"/>
-        <activity android:name="com.example.StudyTime.CalendarActivity"
-            android:label="@string/calendar_name"/>
-        <activity android:name="com.example.StudyTime.MainActivity"
-            android:label="@string/timer_name">
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_drawer"

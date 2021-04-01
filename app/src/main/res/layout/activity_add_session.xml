@@ -8,20 +8,6 @@
     tools:context="com.example.StudyTime.AddSessionFragment">
 
 
-    <Button
-        android:id="@+id/return_to_previous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="24dp"
-        android:onClick="moveToTimer"
-        android:text="@string/return_to_previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/currentDate"
         android:layout_width="wrap_content"
