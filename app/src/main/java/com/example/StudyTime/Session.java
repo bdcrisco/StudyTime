@@ -1,5 +1,7 @@
 package com.example.StudyTime;
 
+import com.applandeo.materialcalendarview.EventDay;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,5 +82,11 @@ public class Session {
 
         // formats the string in the way the user likes
         return String.format("%d:%02d hrs", hours, minutes);
+    }
+
+    private EventDay getEventDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(startTime);
+        return new EventDay(calendar);
     }
 }

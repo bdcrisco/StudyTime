@@ -47,9 +47,18 @@ import static android.os.SystemClock.elapsedRealtime;
 public class MainActivity extends AppCompatActivity {
 
     SessionList sessionList;
+    CourseList courseList;
+
     Session newSession;
+    Course newCourse;
 
     private View rootView;
+    private Chronometer simpleTimer;
+    private boolean running;
+    private long pauseOffset; // use to calculate time paused
+    private Spinner spinnerCourse;
+
+
 
     ViewPager2 viewPager;
 
@@ -57,16 +66,34 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawer;
     NavigationView navigationView;
 
+    Button buttonStart;
+    Button buttonStop;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+
+        sessionList = SessionList.getInstance();
+        sessionList.initialize(this.getApplicationContext());
+        courseList = CourseList.getInstance();
+        courseList.initialize(this.getApplicationContext());
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        newSession = new Session();
+        newCourse = new Course("CS 246");
+
+        courseList.addCourse(newCourse);
+
+        // initiate views
+        simpleTimer = findViewById(R.id.simpleTimer);
+        simpleTimer.setFormat("Time: %s");
+        simpleTimer.setBase(elapsedRealtime());
+        addCourseSpinner(); // courses spinner
+
+        simpleTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 drawer.closeDrawers();
@@ -91,14 +118,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-//
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-//                || super.onSupportNavigateUp();
-//    }
-
 
     private void loadFragment(int menuID) {
         if (menuID == R.id.home_constraint) {
@@ -115,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (menuID == R.id.recycler_view) {
             viewPager.setCurrentItem(4);
         }
-    }
 
     public void openDrawer(View view) {
         drawer.openDrawer(GravityCompat.START);
@@ -152,5 +170,41 @@ public class MainActivity extends AppCompatActivity {
             return 5;
         }
     }
+
+//    addCourseSpinner();
+//    addListenerOnButton();
+    public void addCourseSpinner(){
+        spinnerCourse = (Spinner) findViewById(R.id.spinnerCourse);
+        List<String> courses = courseList.getStringList();
+//        List<String> courses = new ArrayList<String>();
+//        courses.add("Select your course:");
+//        courses.add("CS246");
+//        courses.add("BIO101");
+//        courses.add("REL275");
+
+        //create a adapter for the spinner and set that to the spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, courses);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCourse.setAdapter(dataAdapter);
+    }
+//    public void addListenerOnButton() {
+//
+////        spinnerCourse = (Spinner) findViewById(R.id.spinner1);
+//        Button btnChooseCourse = (Button) findViewById(R.id.btnSubmit);
+//
+//        btnChooseCourse.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this,
+//                        "You Chose : " +
+//                                "\nCourse : "+ String.valueOf(spinnerCourse.getSelectedItem()) +
+//                                "\nTime : ",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
+//    }
 }
 
