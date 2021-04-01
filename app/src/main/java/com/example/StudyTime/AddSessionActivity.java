@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -26,7 +27,8 @@ public class AddSessionActivity extends AppCompatActivity {
     List<EventDay> events;
     EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
-
+    Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+    TextView myDate;
     private Spinner spinnerCourse, spinnerTopic;
 
     @Override
@@ -34,20 +36,24 @@ public class AddSessionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_session);
 
-        events = new ArrayList<>();
-        calendarView = (CalendarView) findViewById(R.id.addSessionCalendar);
-        Calendar calendar = Calendar.getInstance();
+        // view linking
+        calendarView = findViewById(R.id.addSessionCalendar);
+        myDate = findViewById(R.id.dayLabel);
 
+        // Events for the calendar view
+        events = new ArrayList<>();
         events.add(new EventDay(calendar, R.drawable.event_exists));
         calendarView.setEvents(events);
 
-//          click handling
+        // click handling and Date information for the TextView (also tells us what day is selected, will need later)
+        myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
-//                get first day selected
-                Calendar selectedDate = calendarView.getFirstSelectedDate();
+                // get first day selected
+                // Calendar selectedDate = calendarView.getFirstSelectedDate();
+                myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
 
             }
         });
@@ -58,7 +64,7 @@ public class AddSessionActivity extends AppCompatActivity {
                 currentDay = eventDay;
             }
         };
-        TextView currentDate = (TextView) findViewById(R.id.currentDate);
+        TextView currentDate = (TextView) findViewById(R.id.dayLabel);
         currentDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
 //    }
 //        currentDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
