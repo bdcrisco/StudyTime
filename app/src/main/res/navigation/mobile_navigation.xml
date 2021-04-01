@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_add_session">
+
+    <fragment
+        android:id="@+id/nav_add_session"
+        android:name="com.example.StudyTime.AddSessionFragment"
+        android:label="@string/add_session"
+        tools:layout="@layout/activity_add_session" />
+
+    <fragment
+        android:id="@+id/nav_calendar_view"
+        android:name="com.example.StudyTime.CalendarFragment"
+        android:label="@string/calendar_view"
+        tools:layout="@layout/activity_calendar" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.StudyTime.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/settings" />
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.StudyTime.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/activity_home" />
+
+    <fragment
+        android:id="@+id/nav_recycler"
+        android:name="com.example.StudyTime.RecyclerFragment"
+        android:label="List View"
+        tools:layout="@layout/activity_recycler" />
+</navigation>

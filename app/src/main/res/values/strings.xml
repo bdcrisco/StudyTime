@@ -19,6 +19,25 @@
     <string name="myDate">Date</string>
     <string name="getTime">Time</string>
     <string name="addSessionDate">Date</string>
+    <string name="title_activity_drawer">Drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Study Time</string>
+
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="calendar_view">Calendar View</string>
+    <string name="add_session">Add Session</string>
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recycler">List View</string>
+
 
     <string name="course_prompt">Choose a course:</string>
     <string name="choose_course">Choose Course</string>

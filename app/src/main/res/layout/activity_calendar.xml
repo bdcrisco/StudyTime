@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calendar_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.StudyTime.CalendarActivity">
+    tools:context="com.example.StudyTime.CalendarFragment">
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/Calendar"
@@ -32,34 +33,12 @@
         app:eventsEnabled="true">
     </com.applandeo.materialcalendarview.CalendarView>
 
-    <Button
-        android:id="@+id/switch_listview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="moveToRecycler"
-        android:text="@string/move_to_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/to_timer_a"
-        app:layout_constraintTop_toBottomOf="@+id/Calendar" />
-
-    <Button
-        android:id="@+id/to_timer_a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="moveToTimer"
-        android:text="@string/move_to_timer"
-        app:layout_constraintBaseline_toBaselineOf="@+id/switch_listview"
-        app:layout_constraintEnd_toStartOf="@+id/switch_listview"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/dayLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="11dp"
         android:text="@string/myDate"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
