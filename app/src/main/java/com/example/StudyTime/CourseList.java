@@ -36,7 +36,14 @@ public class CourseList {
         courseList.add(addMe);
         saveCourses();
     }
-    public void addCourse(List<Course> addMe) { courseList.addAll(addMe); }
+    public void addCourse(String addMe) {
+        courseList.add(new Course(addMe));
+        saveCourses();
+    }
+    public void addCourse(List<Course> addMe) {
+        courseList.addAll(addMe);
+        saveCourses();
+    }
 
     public void saveCourses() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

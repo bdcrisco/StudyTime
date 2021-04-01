@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
@@ -31,12 +32,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AddSessionFragment extends Fragment {
-    //From Macbeth's Bird Fragment------
     View rootView;
     public AddSessionFragment(){
         rootView = null;
     }
-    //---end BirdFragment
 
     CalendarView calendarView;
 
@@ -44,9 +43,14 @@ public class AddSessionFragment extends Fragment {
 
     EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
+    CourseList courseList = CourseList.getInstance();
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
     TextView myDate;
-    private Spinner spinnerCourse, spinnerTopic;
+
+    private TextView dayLabel;
+    private TimePicker timePicker;
+    private Spinner spinnerCourse;
+    private Spinner spinnerElapsedTime;
 
    //From BirdFragment----
     //@Override
@@ -56,6 +60,16 @@ public class AddSessionFragment extends Fragment {
             /*Display(inflate) the layout xml for this fragment */
             rootView = inflater.inflate(R.layout.activity_add_session, container, false);
 
+            dayLabel = rootView.findViewById(R.id.dayLabel);
+            timePicker = rootView.findViewById(R.id.timePicker);
+            spinnerCourse = rootView.findViewById(R.id.spinnerCourse);
+            //spinnerElapsedTime = rootView.findViewById(R.id.spinnerElapsedTime);
+
+            dayLabel.getText();
+            timePicker.getBaseline();
+            spinnerCourse.getSelectedItem();
+            //elapsedTime = spinnerElapsedTime.getSelectedItem();
+
             events = new ArrayList<>();
             calendarView = (CalendarView) rootView.findViewById(R.id.addSessionCalendar);
             Calendar calendar = Calendar.getInstance();
@@ -63,9 +77,7 @@ public class AddSessionFragment extends Fragment {
             events.add(new EventDay(calendar, R.drawable.event_exists));
             calendarView.setEvents(events);
 
-            // may have issues
-            TextView currentDate = (TextView) rootView.findViewById(R.id.dayLabel);
-            currentDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
+            dayLabel.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
 
 //            calendarView.setOnDayClickListener(new OnDayClickListener() {
 //                @Override
@@ -84,10 +96,6 @@ public class AddSessionFragment extends Fragment {
     }
 
     public void addCourseSpinner() {
-
-        //TODO change next line
-        CourseList courseList = CourseList.getInstance();
-        spinnerCourse = (Spinner) rootView.findViewById(R.id.spinnerCourse);
         List<String> courses = courseList.getStringList();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, courses);
