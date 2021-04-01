@@ -27,11 +27,10 @@ import java.util.Locale;
 public class CalendarActivity extends AppCompatActivity {
     com.applandeo.materialcalendarview.CalendarView calendarView;
     List<EventDay> events;
-
+    EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
-
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-    TextView myDate;
+    TextView myDate = findViewById(R.id.dayLabel);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class CalendarActivity extends AppCompatActivity {
 
         // view linking
         calendarView = findViewById(R.id.Calendar);
-        myDate = findViewById(R.id.dayLabel);
 
         // Events for the calendar view
         events = new ArrayList<>();
