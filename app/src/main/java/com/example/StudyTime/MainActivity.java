@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         simpleTimer.setFormat("Time: %s");
         simpleTimer.setBase(elapsedRealtime());
         addCourseSpinner(); // courses spinner
-        addListenerOnButton();
 
         simpleTimer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
@@ -125,11 +124,12 @@ public class MainActivity extends AppCompatActivity {
 //    addListenerOnButton();
     public void addCourseSpinner(){
         spinnerCourse = (Spinner) findViewById(R.id.spinnerCourse);
-        List<String> courses = new ArrayList<String>();
-        courses.add("Select your course:");
-        courses.add("CS246");
-        courses.add("BIO101");
-        courses.add("REL275");
+        List<String> courses = courseList.getStringList();
+//        List<String> courses = new ArrayList<String>();
+//        courses.add("Select your course:");
+//        courses.add("CS246");
+//        courses.add("BIO101");
+//        courses.add("REL275");
 
         //create a adapter for the spinner and set that to the spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -137,23 +137,23 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourse.setAdapter(dataAdapter);
     }
-    public void addListenerOnButton() {
-
-//        spinnerCourse = (Spinner) findViewById(R.id.spinner1);
-        Button btnChooseCourse = (Button) findViewById(R.id.btnSubmit);
-
-        btnChooseCourse.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,
-                        "You Chose : " +
-                                "\nCourse : "+ String.valueOf(spinnerCourse.getSelectedItem()) +
-                                "\nTime : ",
-                        Toast.LENGTH_SHORT).show();
-            }
-
-        });
-    }
+//    public void addListenerOnButton() {
+//
+////        spinnerCourse = (Spinner) findViewById(R.id.spinner1);
+//        Button btnChooseCourse = (Button) findViewById(R.id.btnSubmit);
+//
+//        btnChooseCourse.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this,
+//                        "You Chose : " +
+//                                "\nCourse : "+ String.valueOf(spinnerCourse.getSelectedItem()) +
+//                                "\nTime : ",
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
+//    }
 }
 

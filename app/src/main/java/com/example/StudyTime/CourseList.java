@@ -3,6 +3,7 @@ package com.example.StudyTime;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class CourseList {
     public void addCourse(List<Course> addMe) { courseList.addAll(addMe); }
 
     public void saveCourses() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String courseListJson = gson.toJson(courseList);
 
         courseFH.createFile();
@@ -64,7 +65,7 @@ public class CourseList {
             stringList.add(course.getCourseName());
         }
 
-        return getStringList();
+        return stringList;
     }
     private void sort() {
         //TODO

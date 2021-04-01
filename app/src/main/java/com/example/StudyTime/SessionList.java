@@ -3,6 +3,7 @@ package com.example.StudyTime;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.LinkedList;
@@ -40,7 +41,7 @@ public class SessionList {
     }
 
     public void saveSessions() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String sessionListJson = gson.toJson(sessionList);
 
         sessionFH.createFile();

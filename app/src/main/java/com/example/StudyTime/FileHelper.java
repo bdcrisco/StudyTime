@@ -49,7 +49,7 @@ public class FileHelper {
         String contents = "";
         try {
             Scanner myReader = new Scanner(dir);
-            if (myReader.hasNextLine()) { contents = myReader.nextLine(); }
+            while (myReader.hasNextLine()) { contents += myReader.nextLine(); }
             myReader.close();
             System.out.println("Successfully read from file: " + dir.getName());
         } catch (IOException e) {
