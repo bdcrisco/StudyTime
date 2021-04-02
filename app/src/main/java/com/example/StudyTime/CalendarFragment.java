@@ -14,10 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
-import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,17 +26,18 @@ import java.util.Locale;
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarFragment extends Fragment {
     private View rootView;
-        public CalendarFragment(){
+    public CalendarFragment(){
         rootView = null;
     }
 
     com.applandeo.materialcalendarview.CalendarView calendarView;
     List<EventDay> events;
+
     EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
-
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-    TextView myDate;
+
+    private TextView dayLabel;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         if (rootView ==null){
@@ -48,9 +47,9 @@ public class CalendarFragment extends Fragment {
             rootView = inflater.inflate(R.layout.activity_calendar, container, false);
 
             calendarView = (com.applandeo.materialcalendarview.CalendarView) rootView.findViewById(R.id.Calendar);
-            myDate = (TextView) rootView.findViewById(R.id.dayLabel);
+            dayLabel = (TextView) rootView.findViewById(R.id.dayLabel);
 
-            myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
+            dayLabel.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
 
         // Events for the calendar view
         events = new ArrayList<>();
@@ -59,12 +58,12 @@ public class CalendarFragment extends Fragment {
             createEventOnCalendar();
 
         // Date information for the TextView (also tells us what day is selected, will need later)
-        myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
+        dayLabel.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
                 Calendar clickedDayCalendar = eventDay.getCalendar();
-                myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
+                dayLabel.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
             }
         });
             OnDayClickListener onDayClick = new OnDayClickListener() {
