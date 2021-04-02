@@ -55,6 +55,11 @@ public class SessionList {
         }
     }
 
+    public void clear() {
+        sessionFH.createFile();
+        sessionFH.writeToFile("");
+    }
+
     public List<Session> getList() {
         return sessionList;
     }

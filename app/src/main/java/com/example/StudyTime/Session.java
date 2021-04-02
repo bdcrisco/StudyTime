@@ -87,6 +87,6 @@ public class Session {
     private EventDay getEventDay() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(startTime);
-        return new EventDay(calendar);
+        return new EventDay(calendar, R.drawable.event_exists);
     }
 }

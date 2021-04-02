@@ -48,6 +48,11 @@ public class CourseList {
         loadCourses();
     }
 
+    public void clear() {
+        courseFH.createFile();
+        courseFH.writeToFile("");
+    }
+
     // other instance methods can follow
     public void addCourse(Course addMe) {
         courseMap.put(size, addMe);
