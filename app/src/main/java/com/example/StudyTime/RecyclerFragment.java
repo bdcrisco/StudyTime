@@ -54,17 +54,6 @@ public class RecyclerFragment extends Fragment {
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSessions.setAdapter(new SessionAdapter(getContext()));
     }
-
-
-    public void moveToTimer(View view) {
-        Intent intent = new Intent(getActivity(), HomeFragment.class);
-        startActivity(intent);
-    }
-
-    public void moveToCalendar(View view) {
-        Intent intent = new Intent(getActivity(), CalendarFragment.class);
-        startActivity(intent);
-    }
 }
 
 

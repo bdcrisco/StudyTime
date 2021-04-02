@@ -1,13 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">StudyTime</string>
-    <string name="timer_name">Timer</string>
-    <string name="calendar_name">Calendar</string>
-    <string name="session_list_name">Session List</string>
-    <string name="add_session_name">Add Session</string>
-    <string name="move_to_calendar">Calendar</string>
-    <string name="move_to_timer">Timer</string>
-    <string name="move_to_list">List View</string>
-    <string name="move_to_addSession">Add Session</string>
+    <string name="course_count">com.example.StudyTime.COURSE_COUNT</string>
     <string name="return_to_previous">Return</string>
     <string name="string_course">string_course_name</string>
     <string name="string_date">string_date</string>
@@ -34,7 +27,7 @@
     <string name="add_session">Add Session</string>
     <string name="settings">Settings</string>
     <string name="account">Account</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recycler">List View</string>
 

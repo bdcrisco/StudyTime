@@ -53,10 +53,9 @@ public class HomeFragment extends Fragment {
             sessionList.initialize(getContext().getApplicationContext());
             courseList.initialize(getContext().getApplicationContext());
 
-//            courseList.addCourse("Select your course:");
-//            courseList.addCourse("CS246");
-//            courseList.addCourse("BIO101");
-//            courseList.addCourse("REL275");
+            courseList.addCourse("CS 246");
+            courseList.addCourse("BIO 101");
+            courseList.addCourse("REL 275");
 
             newSession = new Session();
 

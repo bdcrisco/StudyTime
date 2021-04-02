@@ -18,9 +18,7 @@ public class SessionList {
     FileHelper sessionFH;
     Context context;
 
-    private SessionList(){
-//        addSession(new Session(1616461188499L, 1616465188499L, new Course ("BIO101")));
-    }
+    private SessionList(){}
 
     public static SessionList getInstance() {
         return(INSTANCE);
@@ -52,7 +50,7 @@ public class SessionList {
         sessionFH.createFile();
         Gson gson = new Gson();
         if (sessionFH.fileExists()) {
-            sessionList = gson.fromJson(sessionFH.readFromFile(), new TypeToken<LinkedList<Session>>() {
+            sessionList = gson.fromJson(sessionFH.readFromFile(), new TypeToken<LinkedList<Session>>(){
             }.getType());
         }
     }
