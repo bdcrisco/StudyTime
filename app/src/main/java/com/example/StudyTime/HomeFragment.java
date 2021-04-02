@@ -109,7 +109,7 @@ public class HomeFragment extends Fragment {
         buttonStop.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if (running == true) {
+                if (running || !running) {
                     buttonStart.setText("Start");
                     simpleTimer.setBase(elapsedRealtime());
                     simpleTimer.stop();
