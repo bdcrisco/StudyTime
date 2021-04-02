@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class Session {
+public class Session implements Comparable<Session>{
     private long startTime;
     private long endTime;
     private List<Long> pauseTime = new ArrayList<>();
@@ -84,9 +84,22 @@ public class Session {
         return String.format("%d:%02d hrs", hours, minutes);
     }
 
-    private EventDay getEventDay() {
+    public EventDay getEventDay() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(startTime);
         return new EventDay(calendar, R.drawable.event_exists);
+    }
+
+    @Override
+    public int compareTo(Session o) {
+        if (o.getStartTime() == this.getStartTime() && o.getEndTime() == this.getEndTime()){
+            return 0;
+        }
+        else if (o.getStartTime() > this.getStartTime()){
+            return -1;
+        }
+        else{
+            return 1;
+        }
     }
 }

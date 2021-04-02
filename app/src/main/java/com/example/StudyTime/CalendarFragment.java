@@ -32,7 +32,6 @@ public class CalendarFragment extends Fragment {
 
     com.applandeo.materialcalendarview.CalendarView calendarView;
     List<EventDay> events;
-    EventDay currentDay;
     SessionList sessionList = SessionList.getInstance();
 
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
@@ -52,9 +51,8 @@ public class CalendarFragment extends Fragment {
 
         // Events for the calendar view
         events = new ArrayList<>();
-        events.add(new EventDay(calendar, R.drawable.event_exists));
+        getEvents();
         calendarView.setEvents(events);
-        createEventOnCalendar();
 
         // Date information for the TextView (also tells us what day is selected, will need later)
         myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
@@ -77,14 +75,9 @@ public class CalendarFragment extends Fragment {
         return rootView;
     }
 
-
-    private void createEventOnCalendar() {
-
-        System.out.println("The Current Date is:" + calendar.getTime());
-        System.out.println("Current Calendar's Year: " + calendar.get(Calendar.YEAR));
-        System.out.println("Current Calendar's Day: " + calendar.get(Calendar.DATE));
-        System.out.println("Current MINUTE: " + calendar.get(Calendar.MINUTE));
-        System.out.println("Current SECOND: " + calendar.get(Calendar.SECOND));
-//        myDate.setText((CharSequence) calendar.getTime());
+    private void getEvents() {
+        for (Session session : sessionList.getList()) {
+            events.add(session.getEventDay());
+        }
     }
 }

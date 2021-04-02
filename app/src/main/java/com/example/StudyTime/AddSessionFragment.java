@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -20,15 +17,9 @@ import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import static android.os.SystemClock.elapsedRealtime;
 
 public class AddSessionFragment extends Fragment {
     View rootView;
@@ -42,13 +33,12 @@ public class AddSessionFragment extends Fragment {
 
     SessionList sessionList = SessionList.getInstance();
     CourseList courseList = CourseList.getInstance();
-    Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+//    Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
 
     Button buttonSaveSession;
 
     private Session newSession;
 
-//    private TextView dayLabel;
     private long selectedDate;
     private TimePicker timePicker;
     private Spinner spinnerCourse;
@@ -62,40 +52,33 @@ public class AddSessionFragment extends Fragment {
             /*Display(inflate) the layout xml for this fragment */
             rootView = inflater.inflate(R.layout.activity_add_session, container, false);
 
-            calendarView = (CalendarView) rootView.findViewById(R.id.addSessionCalendar);
-//            dayLabel = rootView.findViewById(R.id.dayLabel);
-            timePicker = rootView.findViewById(R.id.timePicker);
-            spinnerCourse = rootView.findViewById(R.id.spinnerCourse);
-            spinnerElapsedTime = rootView.findViewById(R.id.spinnerElapsedTime);
+            setViews();
 
-            events = new ArrayList<>();
-
-            Calendar calendar = Calendar.getInstance();
-
-            events.add(new EventDay(calendar, R.drawable.event_exists));
-            calendarView.setEvents(events);
-
-//            dayLabel.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
+            setCalendarEvents();
+            setCourseSpinner();
+            setElapsedTimeSpinner();
+            setSaveStudyTime();
 
             calendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {
                     Calendar clickedDayCalendar = eventDay.getCalendar();
-                    //get first day selected
                     selectedDate = clickedDayCalendar.getTimeInMillis();
-//                    dayLabel.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
                     calculateNewSession();
                 }
             });
-
-            addCourseSpinner();
-            addElapsedTimeSpinner();
-            setSaveStudyTime();
         }
         return rootView;
     }
 
-    public void addCourseSpinner() {
+    private void setViews() {
+        calendarView = (CalendarView) rootView.findViewById(R.id.addSessionCalendar);
+        timePicker = rootView.findViewById(R.id.timePicker);
+        spinnerCourse = rootView.findViewById(R.id.spinnerCourse);
+        spinnerElapsedTime = rootView.findViewById(R.id.spinnerElapsedTime);
+    }
+
+    public void setCourseSpinner() {
         List<String> courses = courseList.getStringList();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, courses);
@@ -103,7 +86,7 @@ public class AddSessionFragment extends Fragment {
         spinnerCourse.setAdapter(dataAdapter);
     }
 
-    public void addElapsedTimeSpinner() {
+    public void setElapsedTimeSpinner() {
         ArrayList<String> elapsedTime = new ArrayList<>();
         elapsedTime.add("30 Minutes");
         elapsedTime.add("1 Hour");
@@ -155,8 +138,13 @@ public class AddSessionFragment extends Fragment {
         newSession.setEndTime(newSession.getStartTime() + getElapsedTimeSpinnerTime());
 
         return newSession;
-//        For debugging:
-//        System.out.println(newSession.getCourse().getCourseName());
-//        System.out.println(newSession.getTime());
+    }
+
+    private void setCalendarEvents() {
+        events = new ArrayList<>();
+        for (Session session : sessionList.getList()) {
+            events.add(session.getEventDay());
+        }
+        calendarView.setEvents(events);
     }
 }

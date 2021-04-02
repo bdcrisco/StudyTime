@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 // An eagerly created singleton for the users session list
@@ -14,6 +16,7 @@ public class SessionList {
     private static SessionList INSTANCE = new SessionList();
 
     // other instance variables can be here
+    long dayLength = 86400000;
     List<Session> sessionList = new LinkedList<>();
     FileHelper sessionFH;
     Context context;
@@ -27,6 +30,7 @@ public class SessionList {
         this.context = context;
         sessionFH = new FileHelper(this.context, "session_list");
         loadSessions();
+        sort();
     }
 
     // other instance methods can follow
@@ -64,7 +68,24 @@ public class SessionList {
         return sessionList;
     }
 
+    public List<Session> getDayList(long startTime) {
+        List<Session> sessions = new LinkedList<>();
+        for (Session session : sessionList) {
+            if (session.getStartTime() > startTime && session.getEndTime() < startTime + dayLength) {
+                sessions.add(session);
+            }
+        }
+        return sessions;
+    }
+
     private void sort() {
-        //TODO
+        Collections.sort(sessionList, new SessionComparator());
+    }
+
+    public class SessionComparator implements Comparator<Session> {
+        @Override
+        public int compare(Session session1, Session session2) {
+            return session1.compareTo(session2);
+        }
     }
 }

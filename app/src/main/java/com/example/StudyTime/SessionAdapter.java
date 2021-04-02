@@ -19,10 +19,11 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> {
     private Context context;
     private ViewGroup parent;
     SessionList sessionList = SessionList.getInstance();
-    private List<Session> localList = sessionList.getList();
+    private List<Session> localList;
 
     public SessionAdapter(Context context){
         this.context = context;
+        localList = sessionList.getList();
     }
 
     @NonNull
