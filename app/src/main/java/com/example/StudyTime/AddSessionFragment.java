@@ -29,7 +29,7 @@ public class AddSessionFragment extends Fragment {
 
     CalendarView calendarView;
 
-    List<EventDay> events;
+    List<EventDay> events = new ArrayList<>();
 
     SessionList sessionList = SessionList.getInstance();
     CourseList courseList = CourseList.getInstance();
@@ -65,6 +65,7 @@ public class AddSessionFragment extends Fragment {
                     Calendar clickedDayCalendar = eventDay.getCalendar();
                     selectedDate = clickedDayCalendar.getTimeInMillis();
                     calculateNewSession();
+                    setCalendarEvents();
                 }
             });
         }
@@ -141,7 +142,6 @@ public class AddSessionFragment extends Fragment {
     }
 
     private void setCalendarEvents() {
-        events = new ArrayList<>();
         for (Session session : sessionList.getList()) {
             events.add(session.getEventDay());
         }
