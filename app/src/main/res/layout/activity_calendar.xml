@@ -16,6 +16,7 @@
         app:abbreviationsLabelsColor="@color/themeDarkBlue"
         app:anotherMonthsDaysLabelsColor="@color/themeBlueGrey"
         app:daysLabelsColor="@color/themeDarkBlue"
+        app:eventsEnabled="true"
         app:headerColor="@color/themeDarkBlue"
         app:headerLabelColor="@color/themeBlueGrey"
         app:highlightedDaysLabelsColor="@color/themeBlueGrey"
@@ -29,23 +30,30 @@
         app:selectionColor="@color/themeOrange"
         app:selectionLabelColor="@color/themeWhite"
         app:todayLabelColor="@color/themeOrange"
-        app:type="one_day_picker"
-        app:eventsEnabled="true">
+        app:type="one_day_picker">
+
+
+
     </com.applandeo.materialcalendarview.CalendarView>
 
-    <TextView
-        android:id="@+id/dayLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="11dp"
-        android:text="@string/myDate"
-        android:textSize="24sp"
+    <LinearLayout
+
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Calendar"
-        app:layout_constraintVertical_bias="0.129" />
+        tools:context="com.example.StudyTime.RecyclerFragment">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_sessions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FAFAFA"
+            tools:listitem="@layout/row_session" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

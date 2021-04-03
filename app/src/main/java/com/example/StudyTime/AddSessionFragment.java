@@ -33,7 +33,7 @@ public class AddSessionFragment extends Fragment {
 
     SessionList sessionList = SessionList.getInstance();
     CourseList courseList = CourseList.getInstance();
-//    Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+
 
     Button buttonSaveSession;
 
@@ -44,8 +44,7 @@ public class AddSessionFragment extends Fragment {
     private Spinner spinnerCourse;
     private Spinner spinnerElapsedTime;
 
-   //From BirdFragment----
-    //@Override
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         if (rootView ==null){
             Log.d("FragmentDemo", "Creating Layout for AddSession Fragment");
@@ -64,8 +63,7 @@ public class AddSessionFragment extends Fragment {
                 public void onDayClick(EventDay eventDay) {
                     Calendar clickedDayCalendar = eventDay.getCalendar();
                     selectedDate = clickedDayCalendar.getTimeInMillis();
-                    calculateNewSession();
-                    setCalendarEvents();
+//                    setCalendarEvents();
                 }
             });
         }

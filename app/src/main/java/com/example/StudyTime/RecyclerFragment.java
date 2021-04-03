@@ -35,7 +35,6 @@ public class RecyclerFragment extends Fragment {
         }
 
         init();
-        generateData();
         setData();
 
         return rootView;
@@ -46,13 +45,11 @@ public class RecyclerFragment extends Fragment {
         rvSessions = rootView.findViewById(R.id.rv_sessions);
     }
 
-    private void generateData(){
 
-    }
 
     private void setData(){
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvSessions.setAdapter(new SessionAdapter(getContext()));
+        rvSessions.setAdapter(new SessionAdapter(getContext(),sessionList.getList()));
     }
 }
 

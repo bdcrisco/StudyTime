@@ -47,6 +47,7 @@ import static android.os.SystemClock.elapsedRealtime;
 public class MainActivity extends AppCompatActivity {
 
     CourseList courseList = CourseList.getInstance();
+    SessionList sessionList = SessionList.getInstance();
 
     ViewPager2 viewPager;
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         courseList.initialize(this.getApplicationContext());
+        sessionList.initialize(this.getApplicationContext());
 
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);

@@ -4,6 +4,9 @@ package com.example.StudyTime;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ListAdapter;
 
 import android.content.Intent;
 import android.os.Build;
@@ -25,6 +28,8 @@ import java.util.Locale;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class CalendarFragment extends Fragment {
+
+    private RecyclerView rvSessions;
     private View rootView;
 
     public CalendarFragment() {
@@ -36,7 +41,9 @@ public class CalendarFragment extends Fragment {
     SessionList sessionList = SessionList.getInstance();
 
     Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-    TextView myDate;
+    SessionAdapter adapter;
+
+    long currentDate;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
@@ -44,27 +51,27 @@ public class CalendarFragment extends Fragment {
 
             /*Display (inflate) the layout xml for this fragment */
             rootView = inflater.inflate(R.layout.activity_calendar, container, false);
-
             calendarView = (com.applandeo.materialcalendarview.CalendarView) rootView.findViewById(R.id.Calendar);
-            myDate = (TextView) rootView.findViewById(R.id.dayLabel);
-
-            myDate.setText(new SimpleDateFormat("M/dd/yyyy").format(calendar.getTime()));
-
+            adapter = new SessionAdapter(getContext(), sessionList.getDayList(currentDate));
             // Events for the calendar view
             setCalendarEvents();
+            setData();
 
             // Date information for the TextView (also tells us what day is selected, will need later)
-            myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(calendar.getTime()));
             calendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {
-                    Calendar clickedDayCalendar = eventDay.getCalendar();
-                    myDate.setText(new SimpleDateFormat("M/dd/yyyy", java.util.Locale.getDefault()).format(clickedDayCalendar.getTimeInMillis()));
-                    long currentDate = calendarView.getFirstSelectedDate().getTimeInMillis();
-                    setCalendarEvents();
+                    currentDate = calendarView.getFirstSelectedDate().getTimeInMillis();
+                    adapter.update(sessionList.getDayList(currentDate));
+                    adapter.notifyDataSetChanged();
                 }
             });
         }
+        return rootView;
+    }
+
+    public View onResumeView() {
+        setCalendarEvents();
         return rootView;
     }
 
@@ -73,5 +80,11 @@ public class CalendarFragment extends Fragment {
             events.add(session.getEventDay());
         }
         calendarView.setEvents(events);
+    }
+
+    private void setData(){
+        rvSessions = rootView.findViewById(R.id.rv_sessions);
+        rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvSessions.setAdapter(adapter);
     }
 }
