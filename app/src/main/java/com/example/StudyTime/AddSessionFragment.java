@@ -61,8 +61,7 @@ public class AddSessionFragment extends Fragment {
             calendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {
-                    Calendar clickedDayCalendar = eventDay.getCalendar();
-                    selectedDate = clickedDayCalendar.getTimeInMillis();
+                    selectedDate = eventDay.getCalendar().getTimeInMillis();
 //                    setCalendarEvents();
                 }
             });
