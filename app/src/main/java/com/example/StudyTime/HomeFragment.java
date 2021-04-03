@@ -22,10 +22,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.os.SystemClock.elapsedRealtime;
+/*
+Home Fragment
+The HomeFragment houses the timer,
+saves a timed session,
+and spinner to choose a course
+ */
 
 public class HomeFragment extends Fragment {
+    /*Fragment instead of activity so can
+    be accessed from drawer fragment
 
+     */
 
+/*
+base constructor to instantiate
+rootView object
+ */
     private View rootView;
     public HomeFragment(){
         rootView = null;
@@ -41,7 +54,11 @@ public class HomeFragment extends Fragment {
     Button buttonStart;
     Button buttonStop;
 
-
+/*
+onCreateView function
+creates and returns the view
+hierarchy associated with the fragment.
+ */
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
             Log.d("Fragment Demo", "Creating Layout for Home Fragment");
