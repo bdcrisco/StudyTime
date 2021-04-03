@@ -61,7 +61,7 @@ public class CalendarFragment extends Fragment {
             calendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {
-                    currentDate = calendarView.getFirstSelectedDate().getTimeInMillis();
+                    currentDate = eventDay.getCalendar().getTimeInMillis();
                     adapter.update(sessionList.getDayList(currentDate));
                     adapter.notifyDataSetChanged();
                 }
