@@ -25,10 +25,10 @@
             android:tint="@color/themeOrange"
             android:title="@string/recycler" />
         <item
-            android:id="@+id/settings_view"
+            android:id="@+id/add_course_view"
             android:icon="@drawable/ic_menu_manage"
             android:tint="@color/themeOrange"
-            android:title="@string/settings" />
+            android:title="@string/add_course" />
 
     </group>
 </menu>

@@ -7,7 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.StudyTime.R;
-
+/*SessionViewHolder class
+extends RecyclerView.ViewHolder
+describes an item view and metadata about its place
+within the RecyclerFragment
+ */
 public class SessionViewHolder extends  RecyclerView.ViewHolder{
     private TextView txtCourseName;
     private TextView txtDate;
@@ -21,12 +25,15 @@ public class SessionViewHolder extends  RecyclerView.ViewHolder{
         txtTime = itemView.findViewById(R.id.txt_time);
     }
 
+    //sets String courseName for our RecyclerView list
     public void setCourseName(String courseName){
         this.txtCourseName.setText(courseName);
     }
+    //sets String date for our RecyclerView list
     public void setDate(String date){
         this.txtDate.setText(date);
     }
+    //sets String time for our RecyclerView list
     public void setTime(String time){
         this.txtTime.setText(time);
     }

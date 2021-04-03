@@ -8,14 +8,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+/*AddCourseFragment
+extends Fragment
+in order to be accessed
+through our drawer fragment
+returns layout for AddCourse page
+allowing users to add a course
+to their session study time
+ */
 
 
 
-
-public class SettingsFragment extends Fragment {
+public class AddCourseFragment extends Fragment {
 
     private View rootView;
-    public SettingsFragment(){
+    public AddCourseFragment(){
         rootView = null;
     }
 

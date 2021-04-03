@@ -26,6 +26,10 @@ public class RecyclerFragment extends Fragment {
     private RecyclerView rvSessions;
     private static final String tAG = "MainActivity";
 
+    /*onCreateView
+    inflates(displays) the activity_recycler layout from xml
+    instantiates init() and setData()
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
@@ -39,14 +43,13 @@ public class RecyclerFragment extends Fragment {
 
         return rootView;
     }
-
+//initialize rvSessions
     private void init(){
-        //localList = SessionList.getInstance().getList();
         rvSessions = rootView.findViewById(R.id.rv_sessions);
     }
 
 
-
+//sends our list data to the adapter
     private void setData(){
         rvSessions.setLayoutManager(new LinearLayoutManager(getContext()));
         rvSessions.setAdapter(new SessionAdapter(getContext(),sessionList.getList()));

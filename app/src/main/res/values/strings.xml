@@ -25,7 +25,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="calendar_view">Calendar View</string>
     <string name="add_session">Add Session</string>
-    <string name="settings">Settings</string>
+    <string name="add_course">Add a Course</string>
     <string name="account">Account</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -37,6 +37,9 @@
     <string name="saveStoppedTime">saveStoppedTime</string>
     <string name="saveCourse">Save Course</string>
     <string name="save_studytime">Save StudyTime</string>
+    <string name="input_label">Course Name</string>
+    <string name="empty">empty</string>
+    <string name="sub">Save Course</string>
 
 
 </resources>
