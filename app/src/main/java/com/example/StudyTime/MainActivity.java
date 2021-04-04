@@ -2,26 +2,24 @@ package com.example.StudyTime;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
-
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+/* Starts all essential navigation processes such as initializing the drawer and
+ * inflating the fragments that you can navigate to */
 public class MainActivity extends AppCompatActivity {
 
     CourseList courseList = CourseList.getInstance();
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager2 viewPager;
 
-    private AppBarConfiguration mAppBarConfiguration;
     DrawerLayout drawer;
     NavigationView navigationView;
 
@@ -55,12 +52,10 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         PagerAdapter demoPagerAdapter = new PagerAdapter(this);
         viewPager.setAdapter(demoPagerAdapter);
+        viewPager.setCurrentItem(0);
     }
 
-/*onCreateOptionsMenu
-specifies the menu options
-inflates the main drawer layout
- */
+    //specifies the menu options and inflates the main drawer layout
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -68,45 +63,41 @@ inflates the main drawer layout
         return true;
     }
 
-    /*
-    loadFragment
-    loads each fragment layout
-    depending on the clicked menuID
-     */
+    //loads each fragment layout depending on the clicked menuID
     private void loadFragment(int menuID) {
         if (menuID == R.id.home_constraint) {
             viewPager.setCurrentItem(0);
             Log.d("FragmentDemo", "Loading Home Fragment");
         } else if (menuID == R.id.add_session) {
             viewPager.setCurrentItem(1);
-            Log.d("FragmentDemo", "Loading Add Session Fragment");
+            Log.d("FragmentDemo", "Loading AddSession Fragment");
         } else if (menuID == R.id.calendar_view) {
             viewPager.setCurrentItem(2);
             Log.d("FragmentDemo", "Loading Calendar Fragment");
         } else if (menuID == R.id.recycler_view) {
             viewPager.setCurrentItem(3);
+            Log.d("FragmentDemo", "Loading RecyclerView Fragment");
         } else if (menuID == R.id.add_course_view) {
             viewPager.setCurrentItem(4);
+            Log.d("FragmentDemo", "Loading AddCourse Fragment");
         }
     }
-/*openDrawer
-onclick function to open menu
-drawer from button
- */
+
+
+    //onClick function to open menu drawer from button
     public void openDrawer(View view) {
         drawer.openDrawer(GravityCompat.START);
     }
-/*PagerAdapter class
-Base class providing the adapter
-to populate pages inside our ViewPager2
-extends FragmentStateAdapter
- */
-    private class PagerAdapter extends FragmentStateAdapter {
+
+
+    /* PagerAdapter class
+     * Base class providing the adapter to populate pages inside our ViewPager2
+     *    extends FragmentStateAdapter                                           */
+    private static class PagerAdapter extends FragmentStateAdapter {
         public PagerAdapter(@NonNull FragmentActivity fragmentActivity) {
             super(fragmentActivity);
         }
 
-        @RequiresApi(api = Build.VERSION_CODES.N)
         @NonNull
         @Override
         public Fragment createFragment(int position) {

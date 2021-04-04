@@ -18,9 +18,10 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
+/*A fragment for the addSession functionality to be accessed by the drawer.
+ *    Allows the user to add sessions to their personal list*/
 public class AddSessionFragment extends Fragment {
     View rootView;
     public AddSessionFragment(){
@@ -34,7 +35,6 @@ public class AddSessionFragment extends Fragment {
     SessionList sessionList = SessionList.getInstance();
     CourseList courseList = CourseList.getInstance();
 
-
     Button buttonSaveSession;
 
     private Session newSession;
@@ -45,6 +45,7 @@ public class AddSessionFragment extends Fragment {
     private Spinner spinnerElapsedTime;
 
 
+    // onCreateView initializes the fragment's view, and returns it to it's super
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         if (rootView ==null){
             Log.d("FragmentDemo", "Creating Layout for AddSession Fragment");
@@ -58,18 +59,26 @@ public class AddSessionFragment extends Fragment {
             setElapsedTimeSpinner();
             setSaveStudyTime();
 
-            calendarView.setOnDayClickListener(new OnDayClickListener() {
+            // background thread runnable
+            getActivity().runOnUiThread(new Runnable(){
                 @Override
-                public void onDayClick(EventDay eventDay) {
-                    courseList.initialize(rootView.getContext().getApplicationContext());
-                    selectedDate = eventDay.getCalendar().getTimeInMillis();
-                    setCalendarEvents();
+                public void run(){
+                    // listener for when a day on the calendar is selected
+                    calendarView.setOnDayClickListener(new OnDayClickListener() {
+                        @Override
+                        public void onDayClick(EventDay eventDay) {
+                            courseList.initialize(rootView.getContext().getApplicationContext());
+                            selectedDate = eventDay.getCalendar().getTimeInMillis();
+                            setCalendarEvents();
+                        }
+                    });
                 }
             });
         }
         return rootView;
     }
 
+    // onResume that makes sure the CalendarEvents and Spinner are synced with the application
     @Override
     public void onResume() {
         super.onResume();
@@ -77,6 +86,7 @@ public class AddSessionFragment extends Fragment {
         setCourseSpinner();
     }
 
+    // sets all of the interactables
     private void setViews() {
         calendarView = (CalendarView) rootView.findViewById(R.id.addSessionCalendar);
         timePicker = rootView.findViewById(R.id.timePicker);
@@ -84,6 +94,7 @@ public class AddSessionFragment extends Fragment {
         spinnerElapsedTime = rootView.findViewById(R.id.spinnerElapsedTime);
     }
 
+    // sets the course spinner data
     public void setCourseSpinner() {
         List<String> courses = courseList.getStringList();
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(),
@@ -92,6 +103,7 @@ public class AddSessionFragment extends Fragment {
         spinnerCourse.setAdapter(dataAdapter);
     }
 
+    // sets the elapsed time spinner
     public void setElapsedTimeSpinner() {
         ArrayList<String> elapsedTime = new ArrayList<>();
         elapsedTime.add("30 Minutes");
@@ -105,6 +117,7 @@ public class AddSessionFragment extends Fragment {
         elapsedTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerElapsedTime.setAdapter(elapsedTimeAdapter);
     }
+    // gets the time for each spinner item in milliseconds
     private long getElapsedTimeSpinnerTime() {
         long conversion = 60000;
         switch((int) spinnerElapsedTime.getSelectedItemId()) {
@@ -125,6 +138,7 @@ public class AddSessionFragment extends Fragment {
         return 0;
     }
 
+    // sets the study save button
     public void setSaveStudyTime() {
         buttonSaveSession =  (Button) rootView.findViewById(R.id.saveSessionButton);
         buttonSaveSession.setOnClickListener(new View.OnClickListener(){
@@ -134,9 +148,9 @@ public class AddSessionFragment extends Fragment {
                 sessionList.addSession(newSession);
             }
         });
-
     }
 
+    // creates a new session based on the fragment's interactables
     private Session calculateNewSession() {
         Session newSession = new Session();
         newSession.setCourse(new Course((String) spinnerCourse.getSelectedItem()));
@@ -146,6 +160,7 @@ public class AddSessionFragment extends Fragment {
         return newSession;
     }
 
+    // sets the calendar events so that a drawable appears indicating a session for a given day
     private void setCalendarEvents() {
         for (Session session : sessionList.getList()) {
             events.add(session.getEventDay());

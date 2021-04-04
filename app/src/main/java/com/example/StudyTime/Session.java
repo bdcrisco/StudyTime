@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+/*A class containing session information*/
 public class Session implements Comparable<Session>{
     private long startTime;
     private long endTime;
@@ -56,6 +57,7 @@ public class Session implements Comparable<Session>{
         return timeFrame + " : " + getElapsedTime();
     }
 
+    // Setters
     public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
@@ -67,6 +69,7 @@ public class Session implements Comparable<Session>{
         this.course = new Course(course);
     }
 
+    // functions that start, stop, and pause a session
     public void start() { startTime = Calendar.getInstance().getTimeInMillis(); }
     public void stop() { endTime = Calendar.getInstance().getTimeInMillis(); }
     public void pause() {
@@ -74,6 +77,7 @@ public class Session implements Comparable<Session>{
             isPaused = !isPaused;
     }
 
+    // returns a string in an elapsed time format
     private String getElapsedTime() {
         long eTime = endTime - startTime;
         int hours = (int) (eTime / 3600000);
@@ -84,12 +88,14 @@ public class Session implements Comparable<Session>{
         return String.format("%d:%02d hrs", hours, minutes);
     }
 
+    // returns a session as an EventDay object
     public EventDay getEventDay() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(startTime);
         return new EventDay(calendar, R.drawable.event_exists);
     }
 
+    // comparison logic for list sorting (required for collections.sort())
     @Override
     public int compareTo(Session o) {
         if (o.getStartTime() == this.getStartTime() && o.getEndTime() == this.getEndTime()){

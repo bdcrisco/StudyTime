@@ -10,18 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-/*AddCourseFragment
-extends Fragment
-in order to be accessed
-through our drawer fragment
-returns layout for AddCourse page
-allowing users to add a course
-to their session study time
- */
 
-
-
+/*A fragment for the addCourse functionality to be accessed by the drawer.
+*    Allows the user to add courses to their personal list*/
 public class AddCourseFragment extends Fragment {
 
     private View rootView;
@@ -34,8 +25,9 @@ public class AddCourseFragment extends Fragment {
 
     CourseList courseList = CourseList.getInstance();
 
+    // onCreateView initializes the fragment's view, and returns it to it's super
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        if (rootView ==null){
+        if (rootView == null){
             Log.d("FragmentDemo", "Creating Layout for Settings Fragment");
             /*Display(inflate) the layout xml for this fragment */
             rootView = inflater.inflate(R.layout.settings, container, false);
@@ -45,6 +37,7 @@ public class AddCourseFragment extends Fragment {
         return rootView;
     }
 
+    // sets a button to allow for the user to add a course
     public void setSaveCourse() {
         buttonSaveCourse = rootView.findViewById(R.id.buttonSaveCourse);
         buttonSaveCourse.setOnClickListener(new View.OnClickListener() {

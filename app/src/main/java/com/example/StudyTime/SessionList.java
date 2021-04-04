@@ -10,8 +10,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-// An eagerly created singleton for the users session list
-// This means that it is created at application start up
+
+/* An eagerly created singleton for the users session list
+ *    This means that it is created at application start up */
 public class SessionList {
     private static SessionList INSTANCE = new SessionList();
 
@@ -21,11 +22,14 @@ public class SessionList {
     FileHelper sessionFH;
     Context context;
 
+    // default constructor, used to set up the singleton at runtime
     private SessionList(){}
 
+    // singleton method, used to get the single SessionList
     public static SessionList getInstance() {
         return(INSTANCE);
     }
+    // An initialize method used to bring in a context, set a FileHelper and load the user's sessions
     public void initialize(Context context) {
         this.context = context;
         sessionFH = new FileHelper(this.context, "session_list");
@@ -33,7 +37,13 @@ public class SessionList {
         sort();
     }
 
-    // other instance methods can follow
+    // Used to clear a user's SessionList
+    public void clear() {
+        sessionFH.createFile();
+        sessionFH.writeToFile("");
+    }
+
+    // two ways to add sessions, either by taking in a session, or by taking in a list of them
     public void addSession(Session addMe) {
         sessionList.add(addMe);
         saveSessions();
@@ -42,6 +52,7 @@ public class SessionList {
         sessionList.addAll(addMe);
     }
 
+    // works with the FileHelper to save the user's sessions
     public void saveSessions() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String sessionListJson = gson.toJson(sessionList);
@@ -50,6 +61,7 @@ public class SessionList {
         sessionFH.writeToFile(sessionListJson);
     }
 
+    // works with the FileHelper to load the user's sessions
     public void loadSessions() {
         sessionFH.createFile();
         Gson gson = new Gson();
@@ -59,15 +71,12 @@ public class SessionList {
         }
     }
 
-    public void clear() {
-        sessionFH.createFile();
-        sessionFH.writeToFile("");
-    }
-
+    // Gets the SessionList as a list
     public List<Session> getList() {
         return sessionList;
     }
 
+    // Gets the Sessions for a single day
     public List<Session> getDayList(long startTime) {
         List<Session> sessions = new LinkedList<>();
         for (Session session : sessionList) {
@@ -78,10 +87,12 @@ public class SessionList {
         return sessions;
     }
 
+    // Sorts the sessionList by date ascending
     private void sort() {
         Collections.sort(sessionList, new SessionComparator());
     }
 
+    // need by Collections Sort to know how to sort a SessionList
     public class SessionComparator implements Comparator<Session> {
         @Override
         public int compare(Session session1, Session session2) {

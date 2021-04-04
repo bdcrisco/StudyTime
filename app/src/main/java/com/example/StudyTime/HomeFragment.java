@@ -1,11 +1,8 @@
 package com.example.StudyTime;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -16,9 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.os.SystemClock.elapsedRealtime;
@@ -70,6 +65,7 @@ hierarchy associated with the fragment.
             sessionList.initialize(getContext().getApplicationContext());
             courseList.initialize(getContext().getApplicationContext());
 
+            // makes sure that the first course in the CourseList is a default course
             courseList.addCourse("Select a course:");
 
             newSession = new Session();
@@ -84,7 +80,7 @@ hierarchy associated with the fragment.
             setStopTimer();
 
             // initiate views
-            simpleTimer = (Chronometer) rootView.findViewById(R.id.simpleTimer);
+            simpleTimer = rootView.findViewById(R.id.simpleTimer);
             simpleTimer.setFormat("Time: %s");
             simpleTimer.setBase(SystemClock.elapsedRealtime());
         }
@@ -98,7 +94,7 @@ hierarchy associated with the fragment.
 
     public void setStartPauseTimer() {
 //        figure out how to change name of button based on bool running or !running
-        buttonStart = (Button) rootView.findViewById(R.id.startButton);
+        buttonStart = rootView.findViewById(R.id.startButton);
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +120,7 @@ hierarchy associated with the fragment.
 
     public void setStopTimer() {
         //     stops the timer and clears the paused hold so it will truly reset
-        buttonStop =  (Button) rootView.findViewById(R.id.stopButton);
+        buttonStop = rootView.findViewById(R.id.stopButton);
         buttonStop.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -144,7 +140,7 @@ hierarchy associated with the fragment.
     }
 
     public void addCourseSpinner() {
-        spinnerCourse = (Spinner) rootView.findViewById(R.id.spinnerCourse);
+        spinnerCourse = rootView.findViewById(R.id.spinnerCourse);
         List<String> courses = courseList.getStringList();
 
         //create a adapter for the spinner and set that to the spinner

@@ -4,22 +4,24 @@ import android.content.Context;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/* A helper class to facilitate the reading and writing to internal storage */
 public class FileHelper {
     Context context;
     String filename;
     File dir;
 
+    // constructor that sets the context and creates a File for saving/loading with
     public FileHelper(Context context, String filename) {
         this.context = context;
         this.filename = filename + ".txt";
         dir = new File(this.context.getApplicationContext().getFilesDir(), this.filename);
     }
 
+    // creates the file (if possible), else displays errors
     public void createFile() {
         try {
             if (dir.createNewFile()) {
@@ -33,6 +35,7 @@ public class FileHelper {
         }
     }
 
+    // writes data to the file
     public void writeToFile(String contents) {
         try {
             FileWriter myWriter = new FileWriter(dir);
@@ -45,6 +48,7 @@ public class FileHelper {
         }
     }
 
+    // reads data from the file
     public String readFromFile() {
         String contents = "";
         try {
@@ -60,6 +64,7 @@ public class FileHelper {
         return contents;
     }
 
+    // checks to see if a file exists and has data inside of it
     public boolean fileExists() {
         Scanner sc = null;
         try {

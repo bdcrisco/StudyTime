@@ -7,11 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.StudyTime.R;
-/*SessionViewHolder class
-extends RecyclerView.ViewHolder
-describes an item view and metadata about its place
-within the RecyclerFragment
- */
+
+/* SessionViewHolder class
+ *    Describes an item view and metadata about its place within the RecyclerFragment
+ *    extends RecyclerView.ViewHolder                                                  */
 public class SessionViewHolder extends  RecyclerView.ViewHolder{
     private TextView txtCourseName;
     private TextView txtDate;
