@@ -41,6 +41,7 @@ public class SessionList {
     public void clear() {
         sessionFH.createFile();
         sessionFH.writeToFile("");
+        sessionFH.readFromFile();
     }
 
     // two ways to add sessions, either by taking in a session, or by taking in a list of them
@@ -91,6 +92,17 @@ public class SessionList {
     private void sort() {
         Collections.sort(sessionList, new SessionComparator());
     }
+
+/* WIP sorting on background thread                                         */
+//    private Runnable sort() {
+//        Runnable sessionSort = new Runnable() {
+//            @Override
+//            public void run() {
+//                Collections.sort(sessionList, new SessionComparator());
+//            }
+//        };
+//        return sessionSort;
+//    }
 
     // need by Collections Sort to know how to sort a SessionList
     public class SessionComparator implements Comparator<Session> {
