@@ -70,9 +70,10 @@ public class CalendarFragment extends Fragment {
         return rootView;
     }
 
-    public View onResumeView() {
+    @Override
+    public void onResume() {
+        super.onResume();
         setCalendarEvents();
-        return rootView;
     }
 
     private void setCalendarEvents() {

@@ -70,9 +70,7 @@ hierarchy associated with the fragment.
             sessionList.initialize(getContext().getApplicationContext());
             courseList.initialize(getContext().getApplicationContext());
 
-            courseList.addCourse("CS 246");
-            courseList.addCourse("BIO 101");
-            courseList.addCourse("REL 275");
+            courseList.addCourse("Select a course:");
 
             newSession = new Session();
 
@@ -91,6 +89,11 @@ hierarchy associated with the fragment.
             simpleTimer.setBase(SystemClock.elapsedRealtime());
         }
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     public void setStartPauseTimer() {

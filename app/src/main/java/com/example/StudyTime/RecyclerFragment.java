@@ -34,8 +34,6 @@ public class RecyclerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.activity_recycler, container, false);
-
-
         }
 
         init();
@@ -43,9 +41,17 @@ public class RecyclerFragment extends Fragment {
 
         return rootView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setData();
+    }
+
 //initialize rvSessions
     private void init(){
         rvSessions = rootView.findViewById(R.id.rv_sessions);
+        sessionList.initialize(rootView.getContext().getApplicationContext());
     }
 
 

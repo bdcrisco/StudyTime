@@ -50,11 +50,10 @@
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:onClick="openDrawer"
-            android:tint="@color/themeOrange"
             app:backgroundTint="@color/themeOrange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_add" />
+            app:srcCompat="@mipmap/ic_rounded_lines_foreground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -61,12 +61,20 @@ public class AddSessionFragment extends Fragment {
             calendarView.setOnDayClickListener(new OnDayClickListener() {
                 @Override
                 public void onDayClick(EventDay eventDay) {
+                    courseList.initialize(rootView.getContext().getApplicationContext());
                     selectedDate = eventDay.getCalendar().getTimeInMillis();
-//                    setCalendarEvents();
+                    setCalendarEvents();
                 }
             });
         }
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setCalendarEvents();
+        setCourseSpinner();
     }
 
     private void setViews() {
